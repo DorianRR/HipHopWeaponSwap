@@ -7,7 +7,6 @@ TagManager:
   - WorldBounds
   - Red
   - Blue
-  - Bad
   layers:
   - Default
   - TransparentFX

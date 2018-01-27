@@ -6,16 +6,12 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 
     public Projectile projectile;
-<<<<<<< HEAD
     public Slider healthSlider;
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
     public float moveSpeed = 15f;
 
-=======
-    public Colour weaponColour;
->>>>>>> origin/aprilHootStuff
 
     private Vector3 direction;
     private Quaternion rotation;
@@ -90,15 +86,9 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Yell()
     {
-<<<<<<< HEAD
         isYelling = true;
         yield return new WaitForSeconds(2f);
         isYelling = false;
-=======
-        Projectile newProjectile = Instantiate(projectile, (transform.position + (5* shootDir)), Quaternion.identity).GetComponent<Projectile>();
-        newProjectile.setColour(weaponColour);
-        newProjectile.setDirection(shootDir);
->>>>>>> origin/aprilHootStuff
     }
 
 }
