@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
     private float health;
     private bool canShoot = true;
     private float timeRest = 2f;
-    private float burstTime = 0.25f;
     private float time = 0;
 
     void Start ()
@@ -63,7 +62,7 @@ public class PlayerController : MonoBehaviour {
                 RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         }
 
-        if (Input.GetAxisRaw("3rd axis P_1") > 0 || Input.GetMouseButton(0))
+        if (Input.GetAxisRaw("3rd axis P_1") > 0)
         {
             if (canShoot)
             {
@@ -111,12 +110,12 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Burst(Vector3 shootDir)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 6; i++)
         {
             Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<Projectile>();
             newProjectile.setDirection(shootDir);
             newProjectile.setColour(weaponColor);
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSeconds(.15f);
         }
     }
 

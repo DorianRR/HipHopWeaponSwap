@@ -18,7 +18,9 @@ public class PlayerController2 : MonoBehaviour {
     private Vector3 direction;
     private Quaternion rotation;
     private float health;
-
+    private bool canShoot = true;
+    private float timeRest = 2f;
+    private float time = 0;
 
     // Use this for initialization
     void Start ()
@@ -30,7 +32,12 @@ public class PlayerController2 : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-
+        time += Time.deltaTime;
+        if (time >= timeRest)
+        {
+            canShoot = true;
+            time = 0;
+        }
         if (Input.GetAxis("RightStickX_P2") > 0 || Input.GetAxis("RightStickY_P2") > 0 || Input.GetAxis("RightStickX_P2") < 0 || Input.GetAxis("RightStickY_P2") < 0)
         {
             direction = new Vector3(Input.GetAxis("RightStickX_P2"), 0, Input.GetAxis("RightStickY_P2"));
@@ -58,7 +65,11 @@ public class PlayerController2 : MonoBehaviour {
 
         if (Input.GetAxisRaw("3rd axis P_2") > 0)
         {
-            Shoot(direction);
+            if (canShoot)
+            {
+                Shoot(direction, isShotgun);
+                canShoot = false;
+            }
         }
         healthSlider.value = health;
         if (Input.GetButtonDown("Yell_P2"))
@@ -67,11 +78,17 @@ public class PlayerController2 : MonoBehaviour {
         }
     }
 
-    void Shoot(Vector3 shootDir)
+    void Shoot(Vector3 shootDir, bool isShotgun)
     {
-        Projectile newProjectile = Instantiate(projectile, (transform.position + (5* shootDir)), Quaternion.identity).GetComponent<Projectile>();
-        newProjectile.setDirection(shootDir);
-        newProjectile.setColour(weaponColor);
+        if (!isShotgun)
+        {
+            StartCoroutine(Burst(shootDir));
+        }
+        else
+        {
+
+        }
+
     }
 
     public void getHit()
@@ -84,5 +101,16 @@ public class PlayerController2 : MonoBehaviour {
         isYelling = true;
         yield return new WaitForSeconds(2f);
         isYelling = false;
+    }
+
+    IEnumerator Burst(Vector3 shootDir)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<Projectile>();
+            newProjectile.setDirection(shootDir);
+            newProjectile.setColour(weaponColor);
+            yield return new WaitForSeconds(.15f);
+        }
     }
 }
