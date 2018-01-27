@@ -1,25 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
     public Projectile projectile;
+    public Slider healthSlider;
+    public bool isYelling = false;
 
     private Vector3 direction;
     private Quaternion rotation;
+    private float health;
 
-
-    // Use this for initialization
     void Start ()
     {
-        //gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
-
         direction = new Vector3(1, 0, 0);
+        health = 100f;
        
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         
@@ -43,27 +43,40 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-
-            //gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-
-
         }
-
-
-
 
         if (Input.GetAxisRaw("3rd axis P_1") > 0)
         {
             Shoot(direction);
         }
+        if (Input.GetButtonDown("Yell_P1"))
+        {
+            StartCoroutine(Yell());
+            
+        }
+        healthSlider.value = health;
     }
 
     void Shoot(Vector3 shootDir)
     {
         Projectile newProjectile = Instantiate(projectile, (transform.position + (5* shootDir)), Quaternion.identity).GetComponent<Projectile>();
         newProjectile.setDirection(shootDir);
+    }
+
+
+    public void getHit()
+    {
+        health -= 24f;
+    }
+
+    IEnumerator Yell()
+    {
+        isYelling = true;
+        Debug.Log(isYelling);
+        yield return new WaitForSeconds(2f);
+        isYelling = false;
+        Debug.Log(isYelling);
     }
 
 }
