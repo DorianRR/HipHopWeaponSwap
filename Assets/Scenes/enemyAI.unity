@@ -1052,7 +1052,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 114191466719367596, guid: 0beea4ecaf4c5854ebc92eb6a4d9e881,
     type: 2}
-  weaponColour: 0
+  healthSlider: {fileID: 0}
+  isYelling: 0
+  hasLiquor: 0
+  isShotgun: 0
+  moveSpeed: 15
+  weaponColor: 1
 --- !u!1 &1816663106 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100008, guid: c68d7b6bc07738a4caefe756cfa188cf, type: 3}
@@ -1123,7 +1128,8 @@ Prefab:
       propertyPath: weaponColour
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114814727639436034, guid: 722a5f046b142fe449027605bfa589f5, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 722a5f046b142fe449027605bfa589f5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1954700597
