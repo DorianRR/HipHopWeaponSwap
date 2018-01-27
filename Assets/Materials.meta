@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: f31ce7a8f7257ce48bf2b388342b83d2
 folderAsset: yes
 timeCreated: 1517023904
+=======
+guid: 83f2477e7e7586f49ac66f0ee54a20cc
+folderAsset: yes
+timeCreated: 1517023772
+>>>>>>> origin/aprilHootStuff
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
