@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class playerShoot : MonoBehaviour
+{
 
     public GameObject projectile;
     private GameObject projectileHolder;
@@ -19,17 +20,17 @@ public class Enemy : MonoBehaviour {
     private enum State { stand, shoot, walk, pending };
     private State currState;
     private int shotsFired = 0;
-    public int hitPoints;
-    public Vector3 target;
 
-    void Start () {
+    void Start()
+    {
         currState = State.walk;
         projectileHolder = GameObject.Find("Projectiles");
         playerPosition = playerOne.transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         playerPosition = playerOne.transform.position;
         if (Input.GetMouseButtonUp(0))
         {
@@ -52,8 +53,8 @@ public class Enemy : MonoBehaviour {
         {
 
         }
-        
-	}
+
+    }
 
 
     IEnumerator handleShooting()
@@ -61,7 +62,7 @@ public class Enemy : MonoBehaviour {
         currState = State.pending;
 
 
-        if ( shotsFired < numberShots)
+        if (shotsFired < numberShots)
         {
             //fire(Vector3.right);
             fireAtPlayer();
@@ -70,7 +71,6 @@ public class Enemy : MonoBehaviour {
         }
         else
         {
-            moveRandomly();
             currState = State.walk;
         }
 
@@ -90,9 +90,26 @@ public class Enemy : MonoBehaviour {
     {
         currState = State.pending;
 
-        float bufferDistance = walkSpeed * .1f;
+        float bufferDistance = walkSpeed * .5f;
+        bool foundValidPos = false;
+        Vector3 target = new Vector3();
+        while (!foundValidPos)
+        {
+            Vector3 offset = new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)).normalized;
+            offset *= wanderRange;
+            target = offset + transform.position;
 
-
+            if (!Physics.Raycast(transform.position, offset, wanderRange))
+                foundValidPos = true;
+            else
+            {
+                offset.x *= -1;
+                offset.z *= -1;
+                target = offset + transform.position;
+                if (!Physics.Raycast(transform.position, offset, wanderRange))
+                    foundValidPos = true;
+            }
+        }
         while (Vector3.Distance(target, transform.position) > bufferDistance)
         {
             Vector3 newPos = transform.position;
@@ -124,43 +141,8 @@ public class Enemy : MonoBehaviour {
     //Hit by projectile
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("ow");
-        if(collision.gameObject.tag == "Red")
-        {
-            hitPoints--;
-            Destroy(collision.gameObject);
-        }
-        if(hitPoints<1)
-        {
-            Destroy(this.gameObject);
-        }
-    }
-    private void moveRandomly()
-    {
-        Debug.Log("random function called");
-        bool foundValidPos = false;
-        while (!foundValidPos)
-        {
-            Vector3 offset = new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)).normalized;
-            offset *= wanderRange;
-            target = offset + transform.position;
-
-            if (!Physics.Raycast(transform.position, offset, wanderRange))
-                foundValidPos = true;
-            else
-            {
-                offset.x *= -1;
-                offset.z *= -1;
-                target = offset + transform.position;
-                if (!Physics.Raycast(transform.position, offset, wanderRange))
-                    foundValidPos = true;
-            }
-        }
-
+       
     }
 
-    public void setInitialMovement(Vector3 initPosition)
-    {
-        target = initPosition;
-    }
+
 }
