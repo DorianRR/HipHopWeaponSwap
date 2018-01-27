@@ -8,6 +8,8 @@ public class PlayerController2 : MonoBehaviour {
     public Projectile projectile;
     public Slider healthSlider;
     bool isYelling = false;
+    public bool hasLiquor;
+    public bool isShotgun;
 
     private Vector3 direction;
     private Quaternion rotation;
@@ -73,9 +75,7 @@ public class PlayerController2 : MonoBehaviour {
     IEnumerator Yell()
     {
         isYelling = true;
-        Debug.Log(isYelling);
         yield return new WaitForSeconds(2f);
         isYelling = false;
-        Debug.Log(isYelling);
     }
 }

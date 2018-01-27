@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     public Projectile projectile;
     public Slider healthSlider;
     public bool isYelling = false;
+    public bool hasLiquor;
+    public bool isShotgun;
 
     private Vector3 direction;
     private Quaternion rotation;
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetAxisRaw("3rd axis P_1") > 0)
         {
-            Shoot(direction);
+            Shoot(direction, isShotgun);
         }
         if (Input.GetButtonDown("Yell_P1"))
         {
@@ -58,10 +60,18 @@ public class PlayerController : MonoBehaviour {
         healthSlider.value = health;
     }
 
-    void Shoot(Vector3 shootDir)
+    void Shoot(Vector3 shootDir, bool isShotgun)
     {
-        Projectile newProjectile = Instantiate(projectile, (transform.position + (5* shootDir)), Quaternion.identity).GetComponent<Projectile>();
-        newProjectile.setDirection(shootDir);
+        if(!isShotgun)
+        {
+            Projectile newProjectile = Instantiate(projectile, (transform.position + (5* shootDir)), Quaternion.identity).GetComponent<Projectile>();
+            newProjectile.setDirection(shootDir);
+        }
+        else
+        {
+
+        }
+        
     }
 
 
@@ -73,10 +83,8 @@ public class PlayerController : MonoBehaviour {
     IEnumerator Yell()
     {
         isYelling = true;
-        Debug.Log(isYelling);
         yield return new WaitForSeconds(2f);
         isYelling = false;
-        Debug.Log(isYelling);
     }
 
 }
