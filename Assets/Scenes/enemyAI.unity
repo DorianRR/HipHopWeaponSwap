@@ -736,12 +736,12 @@ Prefab:
     - target: {fileID: 114580188546426150, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3,
         type: 2}
       propertyPath: shootInterval
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 114580188546426150, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3,
         type: 2}
       propertyPath: numberShots
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114662609537402774, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3, type: 2}
