@@ -9,51 +9,90 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
+<<<<<<< HEAD
   m_RootGameObject: {fileID: 1810502702171128}
   m_IsPrefabParent: 1
 --- !u!1 &1090956301535632
 GameObject:
   m_ObjectHideFlags: 1
+=======
+  m_RootGameObject: {fileID: 1318296828030054}
+  m_IsPrefabParent: 1
+--- !u!1 &1318296828030054
+GameObject:
+  m_ObjectHideFlags: 0
+>>>>>>> origin/aprilHootStuff
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 4350046712765038}
   - component: {fileID: 33245360060937042}
   - component: {fileID: 136984790018083098}
   - component: {fileID: 23974519420330710}
   m_Layer: 0
   m_Name: Capsule
+=======
+  - component: {fileID: 4811392025782384}
+  - component: {fileID: 33030688083100360}
+  - component: {fileID: 136380894034380468}
+  - component: {fileID: 23198262034429252}
+  - component: {fileID: 54325487954466738}
+  - component: {fileID: 114814727639436034}
+  m_Layer: 0
+  m_Name: Player 2
+>>>>>>> origin/aprilHootStuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!1 &1126184004097210
 GameObject:
   m_ObjectHideFlags: 0
+=======
+--- !u!1 &1610043605016702
+GameObject:
+  m_ObjectHideFlags: 1
+>>>>>>> origin/aprilHootStuff
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 4414704187033516}
   - component: {fileID: 33207917302238470}
   - component: {fileID: 136968217097148924}
   - component: {fileID: 23556126740041970}
   m_Layer: 0
   m_Name: Penis
+=======
+  - component: {fileID: 4055602262302600}
+  - component: {fileID: 33550275170681242}
+  - component: {fileID: 136239736062147854}
+  - component: {fileID: 23967996612035560}
+  m_Layer: 0
+  m_Name: Capsule
+>>>>>>> origin/aprilHootStuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!1 &1810502702171128
+=======
+--- !u!1 &1659185241058848
+>>>>>>> origin/aprilHootStuff
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 4081225557211558}
   - component: {fileID: 33898980808805642}
   - component: {fileID: 136176364112328476}
@@ -62,16 +101,29 @@ GameObject:
   - component: {fileID: 114495686201760144}
   m_Layer: 0
   m_Name: Player 2
+=======
+  - component: {fileID: 4593160068526526}
+  - component: {fileID: 33260073745878742}
+  - component: {fileID: 136929198322638746}
+  - component: {fileID: 23998734400450828}
+  m_Layer: 0
+  m_Name: Penis
+>>>>>>> origin/aprilHootStuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!4 &4081225557211558
+=======
+--- !u!4 &4055602262302600
+>>>>>>> origin/aprilHootStuff
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1810502702171128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -38.8, y: 2, z: 1.62}
@@ -82,10 +134,22 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4350046712765038
+=======
+  m_GameObject: {fileID: 1610043605016702}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.61999995, z: 0}
+  m_LocalScale: {x: 0.94416356, y: 0.9441644, z: 0.9441645}
+  m_Children: []
+  m_Father: {fileID: 4593160068526526}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4593160068526526
+>>>>>>> origin/aprilHootStuff
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1090956301535632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.62, z: 0}
@@ -95,10 +159,23 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4414704187033516
+=======
+  m_GameObject: {fileID: 1659185241058848}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.011999766, y: 0.52, z: 0.779}
+  m_LocalScale: {x: 0.39874476, y: 0.3987451, z: 0.18492275}
+  m_Children:
+  - {fileID: 4055602262302600}
+  m_Father: {fileID: 4811392025782384}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!4 &4811392025782384
+>>>>>>> origin/aprilHootStuff
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1126184004097210}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0.012, y: 0.28999996, z: 0.779}
@@ -109,11 +186,27 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &23556126740041970
+=======
+  m_GameObject: {fileID: 1318296828030054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14, y: 5.4, z: 42.4}
+  m_LocalScale: {x: 3, y: 4.312559, z: 3}
+  m_Children:
+  - {fileID: 4593160068526526}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23198262034429252
+>>>>>>> origin/aprilHootStuff
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1126184004097210}
+=======
+  m_GameObject: {fileID: 1318296828030054}
+>>>>>>> origin/aprilHootStuff
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -122,41 +215,11 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
+<<<<<<< HEAD
   - {fileID: 2100000, guid: 113236017c26103419777e61c2763529, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!23 &23806617872211616
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1810502702171128}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
+=======
   - {fileID: 2100000, guid: cc4feadf31a7669498389bff991f1e06, type: 2}
+>>>>>>> origin/aprilHootStuff
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -176,12 +239,66 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!23 &23974519420330710
+<<<<<<< HEAD
+--- !u!23 &23806617872211616
+=======
+--- !u!23 &23967996612035560
+>>>>>>> origin/aprilHootStuff
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
+  m_GameObject: {fileID: 1810502702171128}
+=======
+  m_GameObject: {fileID: 1610043605016702}
+>>>>>>> origin/aprilHootStuff
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+<<<<<<< HEAD
+  - {fileID: 2100000, guid: cc4feadf31a7669498389bff991f1e06, type: 2}
+=======
+  - {fileID: 2100000, guid: 113236017c26103419777e61c2763529, type: 2}
+>>>>>>> origin/aprilHootStuff
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+<<<<<<< HEAD
+--- !u!23 &23974519420330710
+=======
+--- !u!23 &23998734400450828
+>>>>>>> origin/aprilHootStuff
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1090956301535632}
+=======
+  m_GameObject: {fileID: 1659185241058848}
+>>>>>>> origin/aprilHootStuff
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -210,33 +327,59 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
 --- !u!33 &33207917302238470
+=======
+--- !u!33 &33030688083100360
+>>>>>>> origin/aprilHootStuff
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1126184004097210}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33245360060937042
+=======
+  m_GameObject: {fileID: 1318296828030054}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &33260073745878742
+>>>>>>> origin/aprilHootStuff
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1090956301535632}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33898980808805642
+=======
+  m_GameObject: {fileID: 1659185241058848}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &33550275170681242
+>>>>>>> origin/aprilHootStuff
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1810502702171128}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54660978770097224
+=======
+  m_GameObject: {fileID: 1610043605016702}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54325487954466738
+>>>>>>> origin/aprilHootStuff
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1810502702171128}
+=======
+  m_GameObject: {fileID: 1318296828030054}
+>>>>>>> origin/aprilHootStuff
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -244,14 +387,24 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
+<<<<<<< HEAD
   m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &114495686201760144
+=======
+  m_Constraints: 116
+  m_CollisionDetection: 0
+--- !u!114 &114814727639436034
+>>>>>>> origin/aprilHootStuff
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1810502702171128}
+=======
+  m_GameObject: {fileID: 1318296828030054}
+>>>>>>> origin/aprilHootStuff
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5861e9efd68b27948a816de56507a2b0, type: 3}
@@ -259,12 +412,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 114191466719367596, guid: 0beea4ecaf4c5854ebc92eb6a4d9e881,
     type: 2}
+<<<<<<< HEAD
 --- !u!136 &136176364112328476
+=======
+--- !u!136 &136239736062147854
+>>>>>>> origin/aprilHootStuff
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1810502702171128}
+=======
+  m_GameObject: {fileID: 1610043605016702}
+>>>>>>> origin/aprilHootStuff
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -272,11 +433,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!136 &136968217097148924
+=======
+--- !u!136 &136380894034380468
+>>>>>>> origin/aprilHootStuff
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1126184004097210}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -286,14 +452,32 @@ CapsuleCollider:
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136984790018083098
+=======
+  m_GameObject: {fileID: 1318296828030054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!136 &136929198322638746
+>>>>>>> origin/aprilHootStuff
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1090956301535632}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+=======
+  m_GameObject: {fileID: 1659185241058848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+>>>>>>> origin/aprilHootStuff
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

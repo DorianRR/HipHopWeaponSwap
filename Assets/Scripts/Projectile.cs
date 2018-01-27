@@ -31,6 +31,11 @@ public class Projectile : MonoBehaviour {
         direction = newDirection.normalized;
     }
 
+    public void setColour(Colour newCol)
+    {
+        tag = newCol.ToString();
+    }
+
     public void OnTriggerEnter(Collider collider)
     {
         if(collider.gameObject.tag == "WorldBounds")
