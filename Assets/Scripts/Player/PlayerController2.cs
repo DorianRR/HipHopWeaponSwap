@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController2 : MonoBehaviour {
 
     public Projectile projectile;
+    public Slider healthSlider;
+    bool isYelling = false;
+    public bool hasLiquor;
+    public bool isShotgun;
 
     private Vector3 direction;
     private Quaternion rotation;
+    private float health;
+
 
     // Use this for initialization
     void Start ()
     {
         direction = new Vector3(1, 0, 0);
+        health = 100f;
     }
 
     // Update is called once per frame
@@ -39,18 +47,18 @@ public class PlayerController2 : MonoBehaviour {
         }
         else
         {
-
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-
-            //gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-
-
         }
 
         if (Input.GetAxisRaw("3rd axis P_2") > 0)
         {
             Shoot(direction);
-        }   
+        }
+        healthSlider.value = health;
+        if (Input.GetButtonDown("Yell_P2"))
+        {
+            StartCoroutine(Yell());
+        }
     }
 
     void Shoot(Vector3 shootDir)
@@ -59,4 +67,15 @@ public class PlayerController2 : MonoBehaviour {
         newProjectile.setDirection(shootDir);
     }
 
+    public void getHit()
+    {
+        health -= 24f;
+    }
+
+    IEnumerator Yell()
+    {
+        isYelling = true;
+        yield return new WaitForSeconds(2f);
+        isYelling = false;
+    }
 }

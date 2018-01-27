@@ -137,6 +137,7 @@ public class Enemy : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("ow");
+        playerOne.GetComponent<PlayerController>().getHit();
         if(collision.gameObject.tag == thisColour.ToString())
         {
             hitPoints--;
