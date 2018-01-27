@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
+    public float moveSpeed = 15f;
+
 
     private Vector3 direction;
     private Quaternion rotation;
@@ -17,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     void Start ()
     {
-        direction = new Vector3(1, 0, 0);
+        direction = new Vector3(0, 0, 1);
         health = 100f;
        
     }
@@ -33,19 +35,21 @@ public class PlayerController : MonoBehaviour {
             transform.rotation = rotation;
         }
 
-        direction = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
-        direction.Normalize();
-        if (Input.GetAxis("Horizontal_P1") > 0 || Input.GetAxis("Horizontal_P1") < 0 || Input.GetAxis("Vertical_P1") < 0 || Input.GetAxis("Vertical_P1") < 0)
+        //direction = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
+        //direction.Normalize();
+        if (Input.GetAxis("Horizontal_P1") > 0 || Input.GetAxis("Horizontal_P1") < 0 || Input.GetAxis("Vertical_P1") < 0 || Input.GetAxis("Vertical_P1") > 0)
         {
-            gameObject.GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+            gameObject.GetComponent<Rigidbody>().constraints =  
+                RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
 
-            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + 0.5f * (new Vector3(Input.GetAxis("Horizontal_P1"), 0, 0));
-            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + 0.5f * (new Vector3(0, 0, Input.GetAxis("Vertical_P1")));
+            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + moveSpeed * Time.deltaTime * (new Vector3(Input.GetAxis("Horizontal_P1"), 0, 0));
+            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + moveSpeed * Time.deltaTime * (new Vector3(0, 0, Input.GetAxis("Vertical_P1")));
 
         }
         else
         {
-            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+            gameObject.GetComponent<Rigidbody>().constraints = 
+                RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         }
 
         if (Input.GetAxisRaw("3rd axis P_1") > 0)

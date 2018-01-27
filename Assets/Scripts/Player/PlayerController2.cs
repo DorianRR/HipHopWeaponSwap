@@ -10,6 +10,8 @@ public class PlayerController2 : MonoBehaviour {
     bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
+    public float moveSpeed = 15f;
+
 
     private Vector3 direction;
     private Quaternion rotation;
@@ -19,7 +21,7 @@ public class PlayerController2 : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        direction = new Vector3(1, 0, 0);
+        direction = new Vector3(0, 0, 1);
         health = 100f;
     }
 
@@ -34,15 +36,17 @@ public class PlayerController2 : MonoBehaviour {
             rotation = Quaternion.LookRotation(direction);
             transform.rotation = rotation;
         }
-        direction = new Vector3(Input.GetAxis("RightStickX_P2"), 0, Input.GetAxis("RightStickY_P2"));
-        direction.Normalize();
 
-        if (Input.GetAxis("Horizontal_P2") > 0 || Input.GetAxis("Horizontal_P2") < 0 || Input.GetAxis("Vertical_P2") < 0 || Input.GetAxis("Vertical_P2") < 0)
+        //direction = new Vector3(Input.GetAxis("RightStickX_P2"), 0, Input.GetAxis("RightStickY_P2"));
+        //direction.Normalize();
+
+        if (Input.GetAxis("Horizontal_P2") > 0 || Input.GetAxis("Horizontal_P2") < 0 || Input.GetAxis("Vertical_P2") < 0 || Input.GetAxisr("Vertical_P2") > 0)
         {
-            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+            gameObject.GetComponent<Rigidbody>().constraints = 
+                RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
 
-            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + 0.5f * (new Vector3(Input.GetAxis("Horizontal_P2"), 0, 0));
-            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + 0.5f * (new Vector3(0, 0, Input.GetAxis("Vertical_P2")));
+            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + moveSpeed * Time.deltaTime * (new Vector3(Input.GetAxis("Horizontal_P2"), 0, 0));
+            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + moveSpeed * Time.deltaTime * (new Vector3(0, 0, Input.GetAxis("Vertical_P2")));
 
         }
         else
