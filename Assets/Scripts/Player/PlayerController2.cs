@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController2 : MonoBehaviour {
 
     public Projectile projectile;
+    private bool isPlayer2 = true;
     //public GameObject projectile;
     //public GameObject shootPos;
 
@@ -17,8 +18,8 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + new Vector3(Input.GetAxis("Horizontal_P1"), 0, 0);
-        gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + new Vector3(0, 0, Input.GetAxis("Vertical_P1"));
+        gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + new Vector3(Input.GetAxis("Horizontal_P2"), 0, 0);
+        gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + new Vector3(0, 0, Input.GetAxis("Vertical_P2"));
 
         //if(Input.GetAxis("RightStickY") > 0)
         //{
@@ -27,6 +28,12 @@ public class PlayerController : MonoBehaviour {
 
 
         if (Input.GetAxisRaw("3rd axis") > 0)
+        {
+            Vector3 shootDir = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
+            shootDir.Normalize();
+            Shoot(shootDir);
+        }
+        if(Input.GetButton("Fire1"))
         {
             Vector3 shootDir = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
             shootDir.Normalize();
