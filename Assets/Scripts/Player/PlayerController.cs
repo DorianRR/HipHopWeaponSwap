@@ -5,54 +5,46 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public Projectile projectile;
-    //public GameObject projectile;
-    //public GameObject shootPos;
+
+    private Vector3 direction;
+    private Quaternion rotation;
+
 
     // Use this for initialization
     void Start ()
     {
-	    	
+        direction = new Vector3(1, 0, 0);
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + new Vector3(Input.GetAxis("Horizontal_P1"), 0, 0);
-        gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + new Vector3(0, 0, Input.GetAxis("Vertical_P1"));
 
-        //if(Input.GetAxis("RightStickY") > 0)
-        //{
-        //    Debug.Log("Success!");
-        //}
-
-
-        if (Input.GetAxisRaw("3rd axis") > 0)
+        if(Input.GetAxis("RightStickX_P1") > 0 || Input.GetAxis("RightStickY_P1") > 0 || Input.GetAxis("RightStickX_P1") < 0 || Input.GetAxis("RightStickY_P1") < 0)
         {
-            Vector3 shootDir = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
-            shootDir.Normalize();
-            Shoot(shootDir);
+            direction = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
+            direction.Normalize();
+            rotation = Quaternion.LookRotation(direction);
+            transform.rotation = rotation;
         }
 
+        direction = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
+        direction.Normalize();
+        gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + 0.5f * (new Vector3(Input.GetAxis("Horizontal_P1"), 0, 0));
+        gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + 0.5f * (new Vector3(0, 0, Input.GetAxis("Vertical_P1")));
+
+
+
+        if (Input.GetAxisRaw("3rd axis P_1") > 0)
+        {
+            Shoot(direction);
+        }
     }
 
     void Shoot(Vector3 shootDir)
     {
-        Debug.Log("Fire!!");
-
-        //Vector3 shootDirection = new Vector3(1, 0, 0);
-        Projectile newProjectile = Instantiate(projectile, (transform.position + (10* shootDir)), Quaternion.identity).GetComponent<Projectile>();
-
+        Projectile newProjectile = Instantiate(projectile, (transform.position + (5* shootDir)), Quaternion.identity).GetComponent<Projectile>();
         newProjectile.setDirection(shootDir);
-
-        //GameObject bullet = Instantiate(projectile, shootPos.transform.position, Quaternion.identity) as GameObject;
-        //Instantiate(projectile);
-        
-        //bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
     }
 
-    void fire(Vector3 fireDirection)
-    {
-        Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
-        newProjectile.setDirection(fireDirection);
-    }
 }
