@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 54900694054765146}
   m_Layer: 0
   m_Name: projectile
-  m_TagString: Red
+  m_TagString: Bad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215836eeb3af2f04d8de966d207be9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 10
   redMaterial: {fileID: 2100000, guid: b6f3731e68bc77d40994de3a13e602b6, type: 2}
   blueMaterial: {fileID: 2100000, guid: 427061042ca997b45a7d86073422fe34, type: 2}
 --- !u!136 &136667767503433576
