@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  redMaterial: {fileID: 2100000, guid: b6f3731e68bc77d40994de3a13e602b6, type: 2}
+  blueMaterial: {fileID: 2100000, guid: 427061042ca997b45a7d86073422fe34, type: 2}
 --- !u!136 &136667767503433576
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -17,19 +17,31 @@ public class Enemy : MonoBehaviour {
 
     private bool isShooting = false;
     private enum State { stand, shoot, walk, pending };
+    public enum Colour { Red, Blue };
     private State currState;
     private int shotsFired = 0;
     public int hitPoints;
     public Vector3 target;
+    public Colour thisColour;
+
+    public Material redMaterial;
+    public Material blueMaterial;
 
     void Start () {
         currState = State.walk;
         projectileHolder = GameObject.Find("Projectiles");
         playerPosition = playerOne.transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        if (thisColour == Colour.Red)
+            GetComponent<Renderer>().material = redMaterial;
+        else if (thisColour == Colour.Blue)
+            GetComponent<Renderer>().material = blueMaterial;
+
+
+    }
+
+    // Update is called once per frame
+    void Update () {
         playerPosition = playerOne.transform.position;
         if (Input.GetMouseButtonUp(0))
         {
@@ -125,7 +137,7 @@ public class Enemy : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("ow");
-        if(collision.gameObject.tag == "Red")
+        if(collision.gameObject.tag == thisColour.ToString())
         {
             hitPoints--;
             Destroy(collision.gameObject);

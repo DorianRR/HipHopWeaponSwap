@@ -917,7 +917,7 @@ Prefab:
     - target: {fileID: 114580188546426150, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3,
         type: 2}
       propertyPath: walkSpeed
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114580188546426150, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3,
         type: 2}
@@ -958,6 +958,26 @@ Prefab:
         type: 2}
       propertyPath: target.x
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 23112821428080014, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3,
+        type: 2}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114580188546426150, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3,
+        type: 2}
+      propertyPath: redMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: b6f3731e68bc77d40994de3a13e602b6, type: 2}
+    - target: {fileID: 114580188546426150, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3,
+        type: 2}
+      propertyPath: blueMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 427061042ca997b45a7d86073422fe34, type: 2}
+    - target: {fileID: 114580188546426150, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3,
+        type: 2}
+      propertyPath: thisColour
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114662609537402774, guid: 1ceb3f1a1c238e4418f3a16dc712dbe3, type: 2}
