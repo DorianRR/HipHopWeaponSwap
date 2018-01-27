@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour {
     private Vector3 direction;
     private Quaternion rotation;
     private float health;
+    private bool canShoot = true;
+    private float timeRest = 2f;
+    private float burstTime = 0.25f;
+    private float time = 0;
 
     void Start ()
     {
@@ -27,7 +31,13 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update ()
     {
-        
+        time += Time.deltaTime;
+        if (time >= timeRest)
+        {
+            canShoot = true;
+            time = 0;
+        }
+
         if (Input.GetAxis("RightStickX_P1") > 0 || Input.GetAxis("RightStickY_P1") > 0 || Input.GetAxis("RightStickX_P1") < 0 || Input.GetAxis("RightStickY_P1") < 0)
         {
             direction = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
@@ -53,26 +63,31 @@ public class PlayerController : MonoBehaviour {
                 RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         }
 
-        if (Input.GetAxisRaw("3rd axis P_1") > 0)
+        if (Input.GetAxisRaw("3rd axis P_1") > 0 || Input.GetMouseButton(0))
         {
-            Shoot(direction, isShotgun);
+            if (canShoot)
+            {
+                Shoot(direction, isShotgun);
+                canShoot = false;
+            }
+            
         }
         if (Input.GetButtonDown("Yell_P1"))
         {
             StartCoroutine(Yell());
             
         }
+        health -= .05f;
         healthSlider.value = health;
+        
+        
     }
 
     void Shoot(Vector3 shootDir, bool isShotgun)
     {
         if(!isShotgun)
         {
-            Projectile newProjectile = Instantiate(projectile, (transform.position + (5* shootDir)), Quaternion.identity).GetComponent<Projectile>();
-            newProjectile.setDirection(shootDir);
-            newProjectile.setColour(weaponColor);
-
+            StartCoroutine(Burst(shootDir));
         }
         else
         {
@@ -92,6 +107,17 @@ public class PlayerController : MonoBehaviour {
         isYelling = true;
         yield return new WaitForSeconds(2f);
         isYelling = false;
+    }
+
+    IEnumerator Burst(Vector3 shootDir)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<Projectile>();
+            newProjectile.setDirection(shootDir);
+            newProjectile.setColour(weaponColor);
+            yield return new WaitForSeconds(.25f);
+        }
     }
 
 }
