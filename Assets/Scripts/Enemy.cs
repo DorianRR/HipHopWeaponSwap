@@ -53,10 +53,10 @@ public class Enemy : MonoBehaviour {
     {
         currState = State.pending;
 
-        fire(Vector3.right);
 
         if ( shotsFired < numberShots)
         {
+            fire(Vector3.right);
             shotsFired++;
             currState = State.stand;
         }
