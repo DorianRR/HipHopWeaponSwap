@@ -7,16 +7,12 @@ public class Projectile : MonoBehaviour {
     private Vector3 direction;
     public float speed;
 
-    public Material redMaterial;
-    public Material blueMaterial;
-
     // Use this for initialization
     void Start () {
         if (tag == "Red")
-            GetComponent<Renderer>().material = redMaterial;
+            colourRed();
         else if (tag == "Blue")
-            GetComponent<Renderer>().material = blueMaterial;
-
+            colourBlue();
     }
 
     // Update is called once per frame
@@ -47,5 +43,15 @@ public class Projectile : MonoBehaviour {
     public void setSpeed(float newSpeed)
     {
         speed = newSpeed;
+    }
+    private void colourRed()
+    {
+        transform.GetChild(0).Find("ParticleSystemRed").gameObject.SetActive(true);
+        transform.GetChild(0).Find("ParticleSystemBlue").gameObject.SetActive(false);
+    }
+    private void colourBlue()
+    {
+        transform.GetChild(0).Find("ParticleSystemRed").gameObject.SetActive(false);
+        transform.GetChild(0).Find("ParticleSystemBlue").gameObject.SetActive(true);
     }
 }

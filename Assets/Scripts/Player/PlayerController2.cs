@@ -171,10 +171,20 @@ public class PlayerController2 : MonoBehaviour
 
     }
 
-
-    public void getHit()
+    private void OnTriggerEnter(Collider other)
     {
-        health -= 24f;
+        Debug.Log("REALLY got hit");
+        if (other.GetComponent<EnemyProjectile>() != null)
+        {
+            Debug.Log("got hit");
+            getHit();
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void getHit()
+    {
+        health -= 10f;
     }
 
     IEnumerator Yell()

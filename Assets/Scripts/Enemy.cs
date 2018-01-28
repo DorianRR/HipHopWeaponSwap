@@ -163,7 +163,10 @@ public class Enemy : MonoBehaviour {
         anim.SetBool("isFiring", true);
         enemyFiring = true;
 
-        Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
+        Vector3 gunPosition = transform.position;
+        gunPosition.y += GetComponent<CapsuleCollider>().height * .75f;
+
+        EnemyProjectile newProjectile = Instantiate(projectile, gunPosition, Quaternion.identity).GetComponent<EnemyProjectile>();
         newProjectile.transform.SetParent(projectileHolder.transform);
         newProjectile.setDirection(fireDirection);
         newProjectile.setSpeed(enemyProjectileSpeed);
@@ -173,7 +176,10 @@ public class Enemy : MonoBehaviour {
         anim.SetBool("isFiring", true);
         enemyFiring = true;
 
-        Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
+        Vector3 gunPosition = transform.position;
+        gunPosition.y += GetComponent<CapsuleCollider>().height * .75f;
+
+        EnemyProjectile newProjectile = Instantiate(projectile, gunPosition, Quaternion.identity).GetComponent<EnemyProjectile>();
         newProjectile.transform.SetParent(projectileHolder.transform);
         Vector3 direction = playerPosition - transform.position;
         direction.y = 0;
@@ -235,12 +241,12 @@ public class Enemy : MonoBehaviour {
         int prob = Random.Range(0, 100);
         if (prob < 50)
         {
-            this.GetComponent<Renderer>().material = redMaterial;
+            this.GetComponentInChildren<SkinnedMeshRenderer>().material = redMaterial;
             thisColour = Colour.Red;
         }
         else
         {
-            this.GetComponent<Renderer>().material = blueMaterial;
+            this.GetComponentInChildren<SkinnedMeshRenderer>().material = blueMaterial;
             thisColour = Colour.Blue;
         }
 
