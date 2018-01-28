@@ -16,5 +16,9 @@ public class LoseScreenScript : MonoBehaviour {
 		if (Input.GetAxis ("Yell_P1") > 0 || Input.GetAxis ("Yell_P2") > 0) {
 			SceneManager.LoadScene (1);
 		}
+		if (Input.GetAxis ("X_Button") > 0) {
+			Debug.Log ("Quit Recieved");
+			Application.Quit ();
+		}
 	}
 }
