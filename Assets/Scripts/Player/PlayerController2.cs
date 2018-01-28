@@ -172,9 +172,17 @@ public class PlayerController2 : MonoBehaviour
     }
 
 
-    public void getHit()
+    private void getHit()
     {
-        health -= 24f;
+        health -= 10f;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<EnemyProjectile>() != null)
+        {
+            getHit();
+            Destroy(other.gameObject);
+        }
     }
 
     IEnumerator Yell()
@@ -213,6 +221,10 @@ public class PlayerController2 : MonoBehaviour
             for (int i = 0; i < 10; i++)
             {
                 temp.SetActive(!temp.activeSelf);
+                if (!isShotgun)
+                {
+                    break;
+                }
                 yield return new WaitForSeconds(.25f);
             }
         }
@@ -223,6 +235,10 @@ public class PlayerController2 : MonoBehaviour
             for (int i = 0; i < 10; i++)
             {
                 temp.SetActive(!temp.activeSelf);
+                if (isShotgun)
+                {
+                    break;
+                }
                 yield return new WaitForSeconds(.25f);
             }
         }
@@ -243,6 +259,13 @@ public class PlayerController2 : MonoBehaviour
             health = 100;
     }
 
+    public void SwapWeaponUI()
+    {
+        GameObject temp = canvas.transform.Find("Weapon1_P2").gameObject;
+        temp.SetActive(!temp.activeSelf);
+        temp = canvas.transform.Find("Weapon2_P2").gameObject;
+        temp.SetActive(!temp.activeSelf);
+    }
 
 
 }
