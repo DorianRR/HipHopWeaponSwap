@@ -30,10 +30,12 @@ public class Enemy : MonoBehaviour {
     private GameObject targetPlayer;
     private GameObject originalPlayer;
     public float enemyProjectileSpeed;
+    private Animator anim;
 
     private bool alreadyCollided;
 
     void Start () {
+        anim = gameObject.GetComponentInChildren<Animator>();
         currState = State.walk;
         projectileHolder = GameObject.Find("Projectiles");
         playerPosition = targetPlayer.transform.position;
@@ -52,24 +54,32 @@ public class Enemy : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(0))
         {
+            anim.SetBool("isFiring", true);
+
             fire(Vector3.right);
         }
 
         if (currState == State.walk)
         {
+            anim.SetBool("isFiring", false);
+            anim.SetBool("isMoving", true);
             StartCoroutine("handleWalking");
         }
         else if (currState == State.shoot)
         {
+            anim.SetBool("isMoving", false);
+            anim.SetBool("isFiring", true);
+
             StartCoroutine("handleShooting");
         }
         else if (currState == State.stand)
         {
+
             StartCoroutine("handleStanding");
         }
         else if (currState == State.pending)
         {
-
+        
         }
         
 	}
@@ -98,6 +108,7 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator handleStanding()
     {
+
         currState = State.pending;
 
         yield return new WaitForSeconds(shootInterval);
@@ -127,6 +138,8 @@ public class Enemy : MonoBehaviour {
 
     void fire(Vector3 fireDirection)
     {
+        anim.SetBool("isFiring", true);
+
         Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
         newProjectile.transform.SetParent(projectileHolder.transform);
         newProjectile.setDirection(fireDirection);
@@ -134,6 +147,8 @@ public class Enemy : MonoBehaviour {
     }
     void fireAtPlayer()
     {
+        anim.SetBool("isFiring", true);
+
         Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
         newProjectile.transform.SetParent(projectileHolder.transform);
         Vector3 direction = playerPosition - transform.position;

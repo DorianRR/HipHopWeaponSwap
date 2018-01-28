@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     public ShotgunProjectile shotgunProjectile;
     public Slider healthSlider;
     public GameObject player;
+    public GameObject yelling;
+
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour {
         direction = new Vector3(0, 0, 1);
         health = 100f;
         shotgunCanShoot = true;
-
+        yelling.SetActive(false);
 
     }
 
@@ -174,8 +176,11 @@ public class PlayerController : MonoBehaviour {
     IEnumerator Yell()
     {
         isYelling = true;
-        yield return new WaitForSeconds(2f);
+        yelling.SetActive(true);
+        yield return new WaitForSeconds(5f);
         isYelling = false;
+        yelling.SetActive(false);
+
     }
 
     IEnumerator Burst(Vector3 shootDir)

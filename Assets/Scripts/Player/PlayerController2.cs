@@ -9,6 +9,8 @@ public class PlayerController2 : MonoBehaviour {
     public ShotgunProjectile shotgunProjectile;
     public Slider healthSlider;
     public GameObject player;
+    public GameObject yelling;
+
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
@@ -17,6 +19,7 @@ public class PlayerController2 : MonoBehaviour {
     public bool swapLiquor = false;
     public bool swapWeapon = false;
     public float timeBetweenShotgunShots = 1f;
+
 
 
     
@@ -35,7 +38,7 @@ public class PlayerController2 : MonoBehaviour {
         direction = new Vector3(0, 0, 1);
         health = 100f;
         shotgunCanShoot = true;
-
+        yelling.SetActive(false);
     }
 
     // Update is called once per frame
@@ -80,7 +83,7 @@ public class PlayerController2 : MonoBehaviour {
                 canShoot = false;
             }
         }
-        if (Input.GetButtonDown("Yell_P2"))
+        if (Input.GetButtonDown("Yell_P2") || Input.GetMouseButtonDown(0))
         {
             StartCoroutine(Yell());
         }
@@ -167,8 +170,10 @@ public class PlayerController2 : MonoBehaviour {
     IEnumerator Yell()
     {
         isYelling = true;
-        yield return new WaitForSeconds(2f);
+        yelling.SetActive(true);
+        yield return new WaitForSeconds(5f);
         isYelling = false;
+        yelling.SetActive(false);
     }
 
     IEnumerator ShootShotgun()
