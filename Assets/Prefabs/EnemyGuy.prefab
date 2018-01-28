@@ -121,10 +121,7 @@ MonoBehaviour:
   hitPoints: 5
   target: {x: 30, y: 0.83, z: 27.45}
   thisColour: 1
-<<<<<<< HEAD
-=======
   enemyProjectileSpeed: 10
->>>>>>> aprilHootStuff
 --- !u!136 &136003585519078010
 CapsuleCollider:
   m_ObjectHideFlags: 1
