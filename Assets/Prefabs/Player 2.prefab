@@ -379,21 +379,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5861e9efd68b27948a816de56507a2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 114191466719367596, guid: 0beea4ecaf4c5854ebc92eb6a4d9e881,
+  projectile: {fileID: 114851235640709494, guid: 37a37d58499fcd64285676f3e1c3c123,
     type: 2}
   shotgunProjectile: {fileID: 114232899910017804, guid: 91e23394d6e35614f8e8a3c37f18cce5,
     type: 2}
   healthSlider: {fileID: 0}
-  player: {fileID: 0}
+  otherPlayer: {fileID: 0}
   yelling: {fileID: 1050768105023960}
+  canvas: {fileID: 0}
   isYelling: 0
   hasLiquor: 0
   isShotgun: 0
   moveSpeed: 15
   weaponColor: 0
-  swapLiquor: 0
-  swapWeapon: 0
-  timeBetweenShotgunShots: 1
+  readyToSwapLiquor: 0
+  readyToSwapWeapon: 0
+  timeBetweenShotgunShots: 0.65
 --- !u!136 &136239736062147854
 CapsuleCollider:
   m_ObjectHideFlags: 1

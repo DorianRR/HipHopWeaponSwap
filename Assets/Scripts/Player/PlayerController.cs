@@ -176,10 +176,19 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    public void getHit()
+    private void getHit()
     {
-        health -= 24f;
+        health -= 10f;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<EnemyProjectile>() != null)
+        {
+            getHit();
+            Destroy(other.gameObject);
+        }
+    }
+
 
     IEnumerator Yell()
     {
