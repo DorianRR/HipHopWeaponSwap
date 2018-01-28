@@ -8,12 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IntroScreen.unity
     guid: d3aeceae80dd36d42ab106e7f987c9b4
-<<<<<<< HEAD
-=======
-  - enabled: 0
-    path: Assets/Scenes/enemyAI.unity
-    guid: 1515bfa805235cf4b8f8a55eb8a9bcd1
->>>>>>> 115a9244f010cdf7aa9fab1f5cf6c6d9482b88a8
   - enabled: 1
     path: Assets/Scenes/ArtImplement.unity
     guid: 667fd4cbab40598489f529d98d922b9f

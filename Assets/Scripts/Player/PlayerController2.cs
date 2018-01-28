@@ -69,6 +69,8 @@ public class PlayerController2 : MonoBehaviour
         {
             anim.SetBool("isDancing", false);
             anim.SetBool("isMoving", true);
+            anim.SetBool("isShootingShotgun", false);
+            anim.SetBool("isShootingPistol", false);
             gameObject.GetComponent<Rigidbody>().constraints =
                 RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
 
@@ -90,17 +92,21 @@ public class PlayerController2 : MonoBehaviour
             {
                 anim.SetBool("isMoving", false);
                 anim.SetBool("isDancing", false);
-                anim.SetBool("isShooting", true);
+
+                anim.SetBool("isShootingShotgun", true);
+                anim.SetBool("isShootingPistol", false);
+
                 Shoot(isShotgun);
                 canShoot = false;
             }
+            else
+            {
+                anim.SetBool("isShootingPistol", true);
+                anim.SetBool("isShootingShotgun", false);
 
+            }
         }
-        else
-        {
-            anim.SetBool("isShooting", false);
 
-        }
         if (Input.GetButtonDown("Yell_P2"))
         {
             StartCoroutine(Yell());
