@@ -17,7 +17,8 @@ public class GameController : MonoBehaviour {
     public GameObject enemy;
 
     private int currWave;
-    private int enemiesKilled;
+    private int enemiesSpawned;
+    private int enemiesDead;
 
     // Use this for initialization
     void Start() {
@@ -45,7 +46,8 @@ public class GameController : MonoBehaviour {
 
     private void startWave()
     {
-        enemiesKilled = 0;
+        enemiesSpawned = 0;
+        enemiesDead = 0;
         spawnWavelet();
     }
 
@@ -56,22 +58,39 @@ public class GameController : MonoBehaviour {
             Enemy newEnemy = Instantiate(enemy, leftSpawnPositions[i], Quaternion.identity).GetComponent<Enemy>();
             newEnemy.setInitialMovement(leftMovePositions[i]);
             newEnemy.setEnemyInfo(this, player1);
+            enemiesSpawned++;
 
             newEnemy = Instantiate(enemy, rightSpawnPositions[i], Quaternion.identity).GetComponent<Enemy>();
             newEnemy.setInitialMovement(rightMovePositions[i]);
             newEnemy.setEnemyInfo(this, player2);
+            enemiesSpawned++;
         }
     }
 
     public void registerEnemyDead( GameObject side )
     {
-        if ( enemiesKilled < totalEnemiesPerWave[currWave] )
+        enemiesDead++;
+        Debug.Log("enemies killed: " + enemiesDead);
+        Debug.Log("Wave Number" + currWave);
+        if ( enemiesSpawned < totalEnemiesPerWave[currWave])
         {
             spawnNewEnemy(side);
+
         }
-        else
+        else if (enemiesDead>=totalEnemiesPerWave[currWave])
         {
             Debug.Log("Wave over!");
+            StartCoroutine(waveBreak());
+        }
+    }
+
+    public IEnumerator waveBreak()
+    {
+        yield return new WaitForSeconds(3.5f);
+        currWave++;
+        if (currWave < totalEnemiesPerWave.Length)
+        {
+            startWave();
         }
     }
 
@@ -79,16 +98,20 @@ public class GameController : MonoBehaviour {
     {
         int door = Random.Range(0, doorsPerSide);
         Enemy newEnemy;
-        if ( side == player1)
+        if (side == player1)
         {
             newEnemy = Instantiate(enemy, leftSpawnPositions[door], Quaternion.identity).GetComponent<Enemy>();
             newEnemy.setInitialMovement(leftMovePositions[door]);
+            enemiesSpawned++;
         }
-        else
+        else if (side == player2)
         {
             newEnemy = Instantiate(enemy, rightSpawnPositions[door], Quaternion.identity).GetComponent<Enemy>();
             newEnemy.setInitialMovement(rightMovePositions[door]);
+            enemiesSpawned++;
         }
+        else
+            newEnemy = null;
         newEnemy.setEnemyInfo(this, side);
     }
 

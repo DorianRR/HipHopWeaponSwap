@@ -43,4 +43,9 @@ public class Projectile : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    public void setSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
 }

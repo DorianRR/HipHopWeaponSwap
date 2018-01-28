@@ -29,7 +29,9 @@ public class Enemy : MonoBehaviour {
     private GameController gc;
     private GameObject targetPlayer;
     private GameObject originalPlayer;
+    public float enemyProjectileSpeed;
 
+    private bool alreadyCollided;
 
     void Start () {
         currState = State.walk;
@@ -45,6 +47,7 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        alreadyCollided = false;
         playerPosition = targetPlayer.transform.position;
 
         if (Input.GetMouseButtonUp(0))
@@ -127,6 +130,7 @@ public class Enemy : MonoBehaviour {
         Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
         newProjectile.transform.SetParent(projectileHolder.transform);
         newProjectile.setDirection(fireDirection);
+        newProjectile.setSpeed(enemyProjectileSpeed);
     }
     void fireAtPlayer()
     {
@@ -135,11 +139,16 @@ public class Enemy : MonoBehaviour {
         Vector3 direction = playerPosition - transform.position;
         direction.y = 0;
         newProjectile.setDirection(direction);
+        newProjectile.setSpeed(enemyProjectileSpeed);
     }
 
     //Hit by projectile
     private void OnCollisionEnter(Collision collision)
     {
+        if (alreadyCollided)
+            return;
+
+        alreadyCollided = true;
         if(collision.gameObject.tag == thisColour.ToString())
         {
             hitPoints--;
