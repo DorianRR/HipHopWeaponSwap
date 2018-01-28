@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class PlayerController2 : MonoBehaviour {
 
     public Projectile projectile;
+    public ShotgunProjectile shotgunProjectile;
     public Slider healthSlider;
     public GameObject player;
-
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
@@ -16,21 +16,26 @@ public class PlayerController2 : MonoBehaviour {
     public Colour weaponColor;
     public bool swapLiquor = false;
     public bool swapWeapon = false;
+    public float timeBetweenShotgunShots = 1f;
 
 
-
+    
     private Vector3 direction;
     private Quaternion rotation;
     private float health;
     private bool canShoot = true;
     private float timeRest = 2f;
     private float time = 0;
+    private bool shotgunCanShoot;
+
 
     // Use this for initialization
     void Start ()
     {
         direction = new Vector3(0, 0, 1);
         health = 100f;
+        shotgunCanShoot = true;
+
     }
 
     // Update is called once per frame
@@ -79,8 +84,7 @@ public class PlayerController2 : MonoBehaviour {
         {
             StartCoroutine(Yell());
         }
-        health -= .05f;
-        healthSlider.value = health;
+        
         if (Input.GetButtonDown("SwapLiquor_P1"))
         {
             //StartCoroutine(swapLiquor());
@@ -99,16 +103,21 @@ public class PlayerController2 : MonoBehaviour {
         {
             swapWeapon = false;
         }
-        if (player.GetComponent<PlayerController2>().swapLiquor)
+        if (player.GetComponent<PlayerController>().swapLiquor)
         {
             hasLiquor = (!hasLiquor);
+            if (hasLiquor)
+            {
+                health = 100;
+            }
         }
 
-        if (player.GetComponent<PlayerController2>().swapWeapon)
+        if (player.GetComponent<PlayerController>().swapWeapon)
         {
             isShotgun = (!isShotgun);
         }
-
+        health -= .05f;
+        healthSlider.value = health;
     }
 
     void Shoot(Vector3 shootDir, bool isShotgun)
@@ -119,7 +128,33 @@ public class PlayerController2 : MonoBehaviour {
         }
         else
         {
+            if (shotgunCanShoot)
+            {
+                StartCoroutine(ShootShotgun());
+                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
 
+                newProjectile.setDirection(shootDir);
+                newProjectile2.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile3.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile4.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile5.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile6.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile7.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+
+                newProjectile.setColour(weaponColor);
+                newProjectile2.setColour(weaponColor);
+                newProjectile3.setColour(weaponColor);
+                newProjectile4.setColour(weaponColor);
+                newProjectile5.setColour(weaponColor);
+                newProjectile6.setColour(weaponColor);
+                newProjectile7.setColour(weaponColor);
+            }
         }
 
     }
@@ -134,6 +169,13 @@ public class PlayerController2 : MonoBehaviour {
         isYelling = true;
         yield return new WaitForSeconds(2f);
         isYelling = false;
+    }
+
+    IEnumerator ShootShotgun()
+    {
+        shotgunCanShoot = false;
+        yield return new WaitForSeconds(timeBetweenShotgunShots);
+        shotgunCanShoot = true;
     }
 
     IEnumerator Burst(Vector3 shootDir)
