@@ -24,7 +24,7 @@ public class PlayerController2 : MonoBehaviour {
     private Quaternion rotation;
     float health;
     private bool canShoot = true;
-    private float timeRest = 2f;
+    private float timeRest = 1.2f;
     private float time = 0;
     private bool shotgunCanShoot;
 
@@ -74,7 +74,7 @@ public class PlayerController2 : MonoBehaviour {
 
         if (Input.GetAxisRaw("3rd axis P_2") > 0)
         {
-            if (canShoot)
+            if (canShoot || isShotgun)
             {
                 Shoot(direction, isShotgun);
                 canShoot = false;
@@ -179,6 +179,7 @@ public class PlayerController2 : MonoBehaviour {
     IEnumerator ShootShotgun()
     {
         shotgunCanShoot = false;
+        Debug.Log(timeBetweenShotgunShots);
         yield return new WaitForSeconds(timeBetweenShotgunShots);
         shotgunCanShoot = true;
     }
@@ -190,7 +191,7 @@ public class PlayerController2 : MonoBehaviour {
             Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<Projectile>();
             newProjectile.setDirection(shootDir);
             newProjectile.setColour(weaponColor);
-            yield return new WaitForSeconds(.15f);
+            yield return new WaitForSeconds(.1f);
         }
     }
     public void swapColour()

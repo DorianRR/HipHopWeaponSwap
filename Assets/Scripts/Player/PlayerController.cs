@@ -74,11 +74,12 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetAxisRaw("3rd axis P_1") > 0)
         {
-            if (canShoot)
+            if (canShoot || isShotgun)
             {
                 Shoot(direction, isShotgun);
                 canShoot = false;
             }
+
             
         }
         if (Input.GetButtonDown("Yell_P1"))
@@ -195,6 +196,7 @@ public class PlayerController : MonoBehaviour {
     IEnumerator ShootShotgun()
     {
         shotgunCanShoot = false;
+        Debug.Log(timeBetweenShotgunShots);
         yield return new WaitForSeconds(timeBetweenShotgunShots);
         shotgunCanShoot = true;
     }

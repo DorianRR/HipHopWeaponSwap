@@ -742,7 +742,7 @@ MonoBehaviour:
   weaponColor: 0
   readyToSwapLiquor: 0
   readyToSwapWeapon: 0
-  timeBetweenShotgunShots: 0.3
+  timeBetweenShotgunShots: 0.65
 --- !u!1 &382110734 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100012, guid: c68d7b6bc07738a4caefe756cfa188cf, type: 3}
@@ -1670,7 +1670,7 @@ MonoBehaviour:
   weaponColor: 1
   readyToSwapLiquor: 0
   readyToSwapWeapon: 0
-  timeBetweenShotgunShots: 0.3
+  timeBetweenShotgunShots: 0.65
 --- !u!1 &1772168195
 GameObject:
   m_ObjectHideFlags: 0
