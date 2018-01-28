@@ -34,6 +34,9 @@ public class PlayerController2 : MonoBehaviour
     private float time = 0;
     private bool shotgunCanShoot;
     private Animator anim;
+    private bool canMove = true;
+    public float drinkTime = 1f;
+    private RawImage boozeIcon;
 
 
 
@@ -44,6 +47,7 @@ public class PlayerController2 : MonoBehaviour
         health = 100f;
         shotgunCanShoot = true;
         yelling.SetActive(false);
+        boozeIcon = GameObject.Find("TossBooze").GetComponent<RawImage>();
 
     }
 
@@ -54,6 +58,10 @@ public class PlayerController2 : MonoBehaviour
         {
             canShoot = true;
             time = 0;
+        }
+        if (!canMove)
+        {
+            return;
         }
 
         if (Input.GetAxis("RightStickX_P2") > 0 || Input.GetAxis("RightStickY_P2") > 0 || Input.GetAxis("RightStickX_P2") < 0 || Input.GetAxis("RightStickY_P2") < 0)
@@ -74,9 +82,18 @@ public class PlayerController2 : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().constraints =
                 RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
 
-            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + moveSpeed * Time.deltaTime * (new Vector3(Input.GetAxis("Horizontal_P2"), 0, 0));
-            gameObject.GetComponent<Rigidbody>().position = gameObject.GetComponent<Rigidbody>().position + moveSpeed * Time.deltaTime * (new Vector3(0, 0, Input.GetAxis("Vertical_P2")));
-
+            Vector3 newPos = gameObject.GetComponent<Rigidbody>().position;
+            newPos += moveSpeed * Time.deltaTime * (new Vector3(Input.GetAxis("Horizontal_P2"), 0, 0));
+            newPos += moveSpeed * Time.deltaTime * (new Vector3(0, 0, Input.GetAxis("Vertical_P2")));
+            bool blocked = false;
+            Collider[] cols = Physics.OverlapSphere(newPos, GetComponent<CapsuleCollider>().radius);
+            foreach (Collider c in cols)
+            {
+                if (c.tag == "WorldBounds" || c.tag == "Divider")
+                    blocked = true;
+            }
+            if (!blocked)
+                transform.position = newPos;
         }
         else
         {
@@ -142,6 +159,8 @@ public class PlayerController2 : MonoBehaviour
             readyToSwapLiquor = false;
             otherPlayer.GetComponent<PlayerController>().readyToSwapLiquor = false;
             otherPlayer.GetComponent<PlayerController>().swapLiquor();
+            StartCoroutine(boozeTossUI());
+
         }
 
         if (otherPlayer.GetComponent<PlayerController>().readyToSwapWeapon && readyToSwapWeapon)
@@ -225,7 +244,9 @@ public class PlayerController2 : MonoBehaviour
     {
         isYelling = true;
         yelling.SetActive(true);
+        setAggro();
         yield return new WaitForSeconds(5f);
+        unsetAggro();
         isYelling = false;
         yelling.SetActive(false);
 
@@ -235,8 +256,9 @@ public class PlayerController2 : MonoBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
-            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<Projectile>();
-            newProjectile.setDirection(direction);
+            float yRotation = Vector3.SignedAngle(new Vector3(0, 0, 1), direction, new Vector3(0, 1, 0));
+            Quaternion rotation = Quaternion.Euler(90, yRotation, 0);
+            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * direction)), rotation).GetComponent<Projectile>(); newProjectile.setDirection(direction);
             newProjectile.setColour(weaponColor);
             yield return new WaitForSeconds(.1f);
         }
@@ -293,10 +315,13 @@ public class PlayerController2 : MonoBehaviour
 
         hasLiquor = !hasLiquor;
         if (hasLiquor)
+        {
+            canMove = false;
             anim.SetBool("caughtWeapon", false);
             anim.SetBool("isCatching", true);
             anim.SetBool("hasLiquor", hasLiquor);
-
+            StartCoroutine(canMoveTrue());
+        }
         health = 100;
     }
 
@@ -327,4 +352,52 @@ public class PlayerController2 : MonoBehaviour
         SceneManager.LoadScene(2);
 
     }
+
+    IEnumerator boozeTossUI()
+    {
+        Vector2 originalPosition = boozeIcon.rectTransform.anchoredPosition; ;
+        Vector2 newPos = boozeIcon.rectTransform.anchoredPosition;
+        newPos.x *= -1;
+        float percentage = 0f;
+        while (percentage < 1)
+        {
+            boozeIcon.rectTransform.anchoredPosition = Vector2.Lerp(originalPosition, newPos, percentage);
+            percentage += 0.02f;
+            yield return null;
+
+        }
+
+    }
+    void setAggro()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (!enemies[i].checkTarget(this.gameObject))
+            {
+                enemies[i].changeAggro();
+                Debug.Log(i);
+            }
+        }
+    }
+
+    void unsetAggro()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i].hasSwapped)
+            {
+                enemies[i].changeAggro();
+            }
+        }
+    }
+
+    
+    IEnumerator canMoveTrue()
+    {
+        yield return new WaitForSeconds(drinkTime);
+        canMove = true;
+    }
+
 }

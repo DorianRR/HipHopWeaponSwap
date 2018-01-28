@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
     public Material blueMaterial;
     public int hitPoints;
     public Vector3 target;
+    public bool hasSwapped;
     
 
     private Vector3 playerPosition;
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour {
             GetComponent<Renderer>().material = blueMaterial;
 
         enemyFiring = false;
+        hasSwapped = false;
     }
 
     // Update is called once per frame
@@ -177,7 +179,7 @@ public class Enemy : MonoBehaviour {
         enemyFiring = true;
 
         Vector3 gunPosition = transform.position;
-        gunPosition.y = +GetComponent<CapsuleCollider>().height * 0.75f;
+        gunPosition.y = +GetComponent<CapsuleCollider>().height * 1.5f;
 
         EnemyProjectile newProjectile = Instantiate(projectile, gunPosition, Quaternion.identity).GetComponent<EnemyProjectile>();
         newProjectile.transform.SetParent(projectileHolder.transform);
@@ -262,6 +264,30 @@ public class Enemy : MonoBehaviour {
             gc.registerEnemyDead(originalPlayer);
             Destroy(this.gameObject);
         }
+    }
+
+    public void changeAggro()
+    {
+        if (targetPlayer == GameObject.Find("Player1"))
+        {
+            targetPlayer = GameObject.Find("Player2");
+        }
+        else if (targetPlayer == GameObject.Find("Player2"))
+        {
+            targetPlayer = GameObject.Find("Player1");
+        }
+        hasSwapped = true;
+    }
+
+    public bool checkTarget(GameObject playerToCheck)
+    {
+        if (targetPlayer == playerToCheck)
+        {
+            return true;
+
+        }
+        else
+            return false;
     }
 
 }

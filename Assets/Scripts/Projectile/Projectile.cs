@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour {
 
     public void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.tag == "WorldBounds")
+        if(collider.gameObject.tag == "WorldBounds" || collider.gameObject.tag == "Divider")
         {
             Destroy(gameObject);
         }
