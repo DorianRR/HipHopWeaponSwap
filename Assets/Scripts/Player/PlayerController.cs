@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     public Colour weaponColor;
     public bool swapLiquor = false;
     public bool swapWeapon = false;
-    public float timeBetweenShotgunShots = 1f;
+    public float timeBetweenShotgunShots = 0.3f;
 
 
 

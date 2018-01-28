@@ -193,6 +193,17 @@ public class Enemy : MonoBehaviour {
         this.gc = gc;
         this.targetPlayer = player;
         this.originalPlayer = player;
+        int prob = Random.Range(0, 100);
+        if(prob<50)
+        {
+            this.GetComponent<Renderer>().material = redMaterial;
+            thisColour = Colour.Red;
+        }
+        else
+        {
+            this.GetComponent<Renderer>().material = blueMaterial;
+            thisColour = Colour.Blue;
+        }
     }
     public void ShotGunHit()
     {
