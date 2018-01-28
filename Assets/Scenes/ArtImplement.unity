@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -387,7 +387,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4495013115903178, guid: 3d67132b53f454d4fa9e937f7f3a0330, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -223.4
+      value: -230.3
       objectReference: {fileID: 0}
     - target: {fileID: 4495013115903178, guid: 3d67132b53f454d4fa9e937f7f3a0330, type: 2}
       propertyPath: m_LocalPosition.y
@@ -610,6 +610,10 @@ Prefab:
     - target: {fileID: 400028, guid: 7235e25c84addfa4f8cd97c06a5967dd, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.0921477
+      objectReference: {fileID: 0}
+    - target: {fileID: 100028, guid: 7235e25c84addfa4f8cd97c06a5967dd, type: 3}
+      propertyPath: m_TagString
+      value: Divider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7235e25c84addfa4f8cd97c06a5967dd, type: 3}
@@ -1044,6 +1048,35 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32faa2b12cb1a3141a40a6176219ecc2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &905475808 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100028, guid: 7235e25c84addfa4f8cd97c06a5967dd, type: 3}
+  m_PrefabInternal: {fileID: 365384376}
+--- !u!65 &905475809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905475808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5244721, y: 0.03876394, z: 0.023015335}
+  m_Center: {x: -0.0000001222494, y: 0.0066832453, z: 0.0049914573}
+--- !u!136 &905475810
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905475808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.04
+  m_Height: 0.025397489
+  m_Direction: 1
+  m_Center: {x: -0.00000012665987, y: 0, z: 0.000000022351742}
 --- !u!1 &977878114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1158,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4495013115903178, guid: 3d67132b53f454d4fa9e937f7f3a0330, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -105.3
+      value: -112.2
       objectReference: {fileID: 0}
     - target: {fileID: 4495013115903178, guid: 3d67132b53f454d4fa9e937f7f3a0330, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1492,7 +1525,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4495013115903178, guid: 3d67132b53f454d4fa9e937f7f3a0330, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 100.5
+      value: 92.2
       objectReference: {fileID: 0}
     - target: {fileID: 4495013115903178, guid: 3d67132b53f454d4fa9e937f7f3a0330, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1591,7 +1624,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4495013115903178, guid: 3d67132b53f454d4fa9e937f7f3a0330, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -16.8
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 4495013115903178, guid: 3d67132b53f454d4fa9e937f7f3a0330, type: 2}
       propertyPath: m_LocalRotation.x
