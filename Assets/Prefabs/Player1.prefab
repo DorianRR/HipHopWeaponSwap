@@ -311,7 +311,6 @@ GameObject:
   - component: {fileID: 23299416511684556}
   - component: {fileID: 54718091839914118}
   - component: {fileID: 114377641738740776}
-  - component: {fileID: 95520994133460448}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -2139,23 +2138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!95 &95520994133460448
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1325097917923238}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95521685439446888
 Animator:
   serializedVersion: 3

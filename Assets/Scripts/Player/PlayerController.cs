@@ -109,6 +109,9 @@ public class PlayerController : MonoBehaviour {
      
         if (Input.GetButtonDown("SwapLiquor_P1"))
         {
+            anim.SetBool("isCatching", false);
+            anim.SetBool("isDrinking", false);
+
             readyToSwapLiquor = true;
         }
         if(Input.GetButtonUp("SwapLiquor_P1"))
@@ -117,6 +120,9 @@ public class PlayerController : MonoBehaviour {
         }
         if (Input.GetButtonDown("SwapWeapon_P1"))
         {
+            anim.SetBool("isCatching", false);
+            anim.SetBool("caughtWeapon", false);
+
             readyToSwapWeapon = true;
             StartCoroutine(BlinkingWeapon());
         }
@@ -136,6 +142,7 @@ public class PlayerController : MonoBehaviour {
 
         if (otherPlayer.GetComponent<PlayerController2>().readyToSwapWeapon && readyToSwapWeapon)
         {
+            anim.SetBool("caughtWeapon", true);
             SwapWeaponUI();
             otherPlayer.GetComponent<PlayerController2>().SwapWeaponUI();
             isShotgun = (!isShotgun);
@@ -288,11 +295,19 @@ public class PlayerController : MonoBehaviour {
     {
         hasLiquor = !hasLiquor;
         if (hasLiquor)
-            health = 100;
+            anim.SetBool("caughtWeapon", false);
+            anim.SetBool("isCatching", true);
+            anim.SetBool("hasLiquor", hasLiquor);
+
+        health = 100;
     }
 
     void SwapWeaponUI()
     {
+        anim.SetBool("isCatching", true);
+        anim.SetBool("caughtWeapon", true);
+
+
         GameObject temp = canvas.transform.Find("Weapon1_P1").gameObject;
         temp.SetActive(!temp.activeSelf);
         temp = canvas.transform.Find("Weapon2_P1").gameObject;
@@ -303,7 +318,6 @@ public class PlayerController : MonoBehaviour {
     {
         if(health < 0)
         {
-            Debug.Log("Dead");
             anim.SetBool("isDead", true);
 
         }

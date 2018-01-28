@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour {
         anim = gameObject.GetComponentInChildren<Animator>();
         currState = State.walk;
         projectileHolder = GameObject.Find("Projectiles");
-        playerPosition = targetPlayer.transform.position;
+        //playerPosition = targetPlayer.transform.position;
         target.y = transform.position.y;
 
         if (thisColour == Colour.Red)

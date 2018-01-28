@@ -57,7 +57,7 @@ public class PlayerController2 : MonoBehaviour
         if (Input.GetAxis("RightStickX_P2") > 0 || Input.GetAxis("RightStickY_P2") > 0 || Input.GetAxis("RightStickX_P2") < 0 || Input.GetAxis("RightStickY_P2") < 0)
         {
             
-            direction = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
+            direction = new Vector3(Input.GetAxis("RightStickX_P2"), 0, Input.GetAxis("RightStickY_P2"));
             direction.Normalize();
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((direction)), .30f);
 
@@ -107,6 +107,8 @@ public class PlayerController2 : MonoBehaviour
 
         if (Input.GetButtonDown("SwapLiquor_P2"))
         {
+            anim.SetBool("isCatching", false);
+            anim.SetBool("isDrinking", false);
             readyToSwapLiquor = true;
         }
         if (Input.GetButtonUp("SwapLiquor_P2"))
@@ -115,6 +117,8 @@ public class PlayerController2 : MonoBehaviour
         }
         if (Input.GetButtonDown("SwapWeapon_P2"))
         {
+            anim.SetBool("isCatching", false);
+            anim.SetBool("caughtWeapon", false);
             readyToSwapWeapon = true;
             StartCoroutine(BlinkingWeapon());
         }
@@ -134,6 +138,8 @@ public class PlayerController2 : MonoBehaviour
 
         if (otherPlayer.GetComponent<PlayerController>().readyToSwapWeapon && readyToSwapWeapon)
         {
+            anim.SetBool("caughtWeapon", true);
+
             isShotgun = (!isShotgun);
             swapColour();
             otherPlayer.GetComponent<PlayerController>().readyToSwapWeapon = false;
@@ -276,13 +282,21 @@ public class PlayerController2 : MonoBehaviour
     }
     public void swapLiquor()
     {
+
         hasLiquor = !hasLiquor;
         if (hasLiquor)
-            health = 100;
+            anim.SetBool("caughtWeapon", false);
+            anim.SetBool("isCatching", true);
+            anim.SetBool("hasLiquor", hasLiquor);
+
+        health = 100;
     }
 
     public void SwapWeaponUI()
     {
+        anim.SetBool("isCatching", true);
+        anim.SetBool("caughtWeapon", true);
+
         GameObject temp = canvas.transform.Find("Weapon1_P2").gameObject;
         temp.SetActive(!temp.activeSelf);
         temp = canvas.transform.Find("Weapon2_P2").gameObject;
