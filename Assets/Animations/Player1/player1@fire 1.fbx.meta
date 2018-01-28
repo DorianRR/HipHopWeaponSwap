@@ -1,32 +1,32 @@
 fileFormatVersion: 2
-guid: 5e40b0324a4cf824a98af6533ceeb5a8
-timeCreated: 1517121370
-licenseType: Free
+guid: 47488a2272807f44aa282ff3f18d345f
+timeCreated: 1517100795
+licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: head
-    100002: head_grp
-    100004: IK_LFoot
-    100006: IK_RFoot
-    100008: L_ball
-    100010: L_elbow
-    100012: L_elbow1_grp
-    100014: L_elbow_grp
-    100016: L_foot
-    100018: L_Foot_ctrl
-    100020: L_hand1
-    100022: L_hand1_grp
-    100024: L_hand2
-    100026: L_hand2_grp
-    100028: L_hand3
-    100030: L_hand3_grp
-    100032: L_hand4_grp
-    100034: L_hand5_grp
-    100036: L_hand6_grp
-    100038: L_hip
-    100040: L_knee
-    100042: L_knee_ctrl
+    100000: //RootNode
+    100002: head
+    100004: head_grp
+    100006: IK_LFoot
+    100008: IK_RFoot
+    100010: L_ball
+    100012: L_elbow
+    100014: L_elbow1_grp
+    100016: L_elbow_grp
+    100018: L_foot
+    100020: L_Foot_ctrl
+    100022: L_hand1
+    100024: L_hand1_grp
+    100026: L_hand2
+    100028: L_hand2_grp
+    100030: L_hand3
+    100032: L_hand3_grp
+    100034: L_hand4_grp
+    100036: L_hand5_grp
+    100038: L_hand6_grp
+    100040: L_hip
+    100042: L_knee
     100044: L_shoulder
     100046: L_shoulder1_grp
     100048: L_shoulder_grp
@@ -45,53 +45,51 @@ ModelImporter:
     100074: L_wrist_grp
     100076: neck
     100078: neck_grp
-    100080: //RootNode
-    100082: R_ball
-    100084: R_elbow
-    100086: R_foot
-    100088: R_Foot_ctrl
-    100090: R_hand1
-    100092: R_hand2
-    100094: R_hand3
-    100096: R_hip
-    100098: R_knee
-    100100: R_knee_ctrl
-    100102: R_shoulder
-    100104: R_thumb
-    100106: R_thumb2
-    100108: R_thumb3
-    100110: R_toe
-    100112: R_wrist
-    100114: root
-    100116: root_ctrl
-    100118: spine_1
-    100120: spine_1_grp
-    100122: spine_2
-    100124: spine_2_grp
-    100126: spine_3
-    100128: spine_3_grp
-    400000: head
-    400002: head_grp
-    400004: IK_LFoot
-    400006: IK_RFoot
-    400008: L_ball
-    400010: L_elbow
-    400012: L_elbow1_grp
-    400014: L_elbow_grp
-    400016: L_foot
-    400018: L_Foot_ctrl
-    400020: L_hand1
-    400022: L_hand1_grp
-    400024: L_hand2
-    400026: L_hand2_grp
-    400028: L_hand3
-    400030: L_hand3_grp
-    400032: L_hand4_grp
-    400034: L_hand5_grp
-    400036: L_hand6_grp
-    400038: L_hip
-    400040: L_knee
-    400042: L_knee_ctrl
+    100080: R_ball
+    100082: R_elbow
+    100084: R_foot
+    100086: R_Foot_ctrl
+    100088: R_hand1
+    100090: R_hand2
+    100092: R_hand3
+    100094: R_hip
+    100096: R_knee
+    100098: R_shoulder
+    100100: R_thumb
+    100102: R_thumb2
+    100104: R_thumb3
+    100106: R_toe
+    100108: R_wrist
+    100110: root
+    100112: root_ctrl
+    100114: spine_1
+    100116: spine_1_grp
+    100118: spine_2
+    100120: spine_2_grp
+    100122: spine_3
+    100124: spine_3_grp
+    400000: //RootNode
+    400002: head
+    400004: head_grp
+    400006: IK_LFoot
+    400008: IK_RFoot
+    400010: L_ball
+    400012: L_elbow
+    400014: L_elbow1_grp
+    400016: L_elbow_grp
+    400018: L_foot
+    400020: L_Foot_ctrl
+    400022: L_hand1
+    400024: L_hand1_grp
+    400026: L_hand2
+    400028: L_hand2_grp
+    400030: L_hand3
+    400032: L_hand3_grp
+    400034: L_hand4_grp
+    400036: L_hand5_grp
+    400038: L_hand6_grp
+    400040: L_hip
+    400042: L_knee
     400044: L_shoulder
     400046: L_shoulder1_grp
     400048: L_shoulder_grp
@@ -110,32 +108,30 @@ ModelImporter:
     400074: L_wrist_grp
     400076: neck
     400078: neck_grp
-    400080: //RootNode
-    400082: R_ball
-    400084: R_elbow
-    400086: R_foot
-    400088: R_Foot_ctrl
-    400090: R_hand1
-    400092: R_hand2
-    400094: R_hand3
-    400096: R_hip
-    400098: R_knee
-    400100: R_knee_ctrl
-    400102: R_shoulder
-    400104: R_thumb
-    400106: R_thumb2
-    400108: R_thumb3
-    400110: R_toe
-    400112: R_wrist
-    400114: root
-    400116: root_ctrl
-    400118: spine_1
-    400120: spine_1_grp
-    400122: spine_2
-    400124: spine_2_grp
-    400126: spine_3
-    400128: spine_3_grp
-    7400000: run
+    400080: R_ball
+    400082: R_elbow
+    400084: R_foot
+    400086: R_Foot_ctrl
+    400088: R_hand1
+    400090: R_hand2
+    400092: R_hand3
+    400094: R_hip
+    400096: R_knee
+    400098: R_shoulder
+    400100: R_thumb
+    400102: R_thumb2
+    400104: R_thumb3
+    400106: R_toe
+    400108: R_wrist
+    400110: root
+    400112: root_ctrl
+    400114: spine_1
+    400116: spine_1_grp
+    400118: spine_2
+    400120: spine_2_grp
+    400122: spine_3
+    400124: spine_3_grp
+    7400000: fire
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -165,10 +161,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: run
+      name: fire
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 24
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

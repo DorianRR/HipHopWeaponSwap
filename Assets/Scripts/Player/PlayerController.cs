@@ -30,10 +30,13 @@ public class PlayerController : MonoBehaviour {
     private float timeRest = 1.2f;
     private float time = 0;
     private bool shotgunCanShoot;
+    private Animator anim;
+
 
 
     void Start ()
     {
+        anim = gameObject.GetComponentInChildren<Animator>();
         direction = new Vector3(0, 0, 1);
         health = 100f;
         shotgunCanShoot = true;
@@ -48,18 +51,22 @@ public class PlayerController : MonoBehaviour {
         {
             canShoot = true;
             time = 0;
+            
         }
 
         if (Input.GetAxis("RightStickX_P1") > 0 || Input.GetAxis("RightStickY_P1") > 0 || Input.GetAxis("RightStickX_P1") < 0 || Input.GetAxis("RightStickY_P1") < 0)
         {
             direction = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
             direction.Normalize();
-            rotation = Quaternion.LookRotation(direction);
-            transform.rotation = rotation;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((direction)), .30f);
+
+           
         }
         
         if (Input.GetAxis("Horizontal_P1") > 0 || Input.GetAxis("Horizontal_P1") < 0 || Input.GetAxis("Vertical_P1") < 0 || Input.GetAxis("Vertical_P1") > 0)
         {
+            anim.SetBool("isDancing", false);
+            anim.SetBool("isMoving", true);
             gameObject.GetComponent<Rigidbody>().constraints =  
                 RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
 
@@ -69,6 +76,8 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            anim.SetBool("isDancing", true);
+            anim.SetBool("isMoving", false);
             gameObject.GetComponent<Rigidbody>().constraints = 
                 RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         }
@@ -77,10 +86,20 @@ public class PlayerController : MonoBehaviour {
         {
             if (canShoot || isShotgun)
             {
+                anim.SetBool("isMoving", false);
+                anim.SetBool("isDancing", false);
+
+                anim.SetBool("isShooting", true);
                 Shoot(isShotgun);
                 canShoot = false;
             }
-            
+
+
+        }
+        else
+        {
+            anim.SetBool("isShooting", false);
+
         }
         if (Input.GetButtonDown("Yell_P1"))
         {
@@ -134,6 +153,12 @@ public class PlayerController : MonoBehaviour {
         healthSlider.value = health;
 
 
+    }
+
+    private void LateUpdate()
+    {
+        CheckDeath();
+        
     }
 
     void Shoot(bool isShotgun)
@@ -272,6 +297,16 @@ public class PlayerController : MonoBehaviour {
         temp.SetActive(!temp.activeSelf);
         temp = canvas.transform.Find("Weapon2_P1").gameObject;
         temp.SetActive(!temp.activeSelf);
+    }
+
+    void CheckDeath()
+    {
+        if(health < 0)
+        {
+            Debug.Log("Dead");
+            anim.SetBool("isDead", true);
+
+        }
     }
 
 }
