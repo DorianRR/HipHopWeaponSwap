@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -319,8 +320,16 @@ public class PlayerController : MonoBehaviour {
         if(health < 0)
         {
             anim.SetBool("isDead", true);
-
+            StartCoroutine(DeathSceneLoad());
         }
     }
+
+    IEnumerator DeathSceneLoad()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(2);
+
+    }
+
 
 }
