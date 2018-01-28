@@ -40,8 +40,13 @@ public class Projectile : MonoBehaviour {
     {
         if(collider.gameObject.tag == "WorldBounds")
         {
+            if (collider.tag == "Red")
+            {
+                Debug.Log("HIT");
+            }
             Destroy(gameObject);
         }
+        
     }
 
     public void setSpeed(float newSpeed)

@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     private Quaternion rotation;
     private float health;
     private bool canShoot = true;
-    private float timeRest = 2f;
+    private float timeRest = 1.2f;
     private float time = 0;
     private bool shotgunCanShoot;
 
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (canShoot || isShotgun)
             {
-                Shoot(direction, isShotgun);
+                Shoot(isShotgun);
                 canShoot = false;
             }
 
@@ -130,32 +130,32 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    void Shoot(Vector3 shootDir, bool isShotgun)
+    void Shoot(bool isShotgun)
     {
         if(!isShotgun)
         {
-            StartCoroutine(Burst(shootDir));
+            StartCoroutine(Burst());
         }
         else
         {
             if (shotgunCanShoot)
             {
                 StartCoroutine(ShootShotgun());
-                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
 
-                newProjectile.setDirection(shootDir);
-                newProjectile2.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile3.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile4.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile5.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile6.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile7.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile.setDirection(direction);
+                newProjectile2.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile3.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile4.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile5.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile6.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile7.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
 
                 newProjectile.setColour(weaponColor);
                 newProjectile2.setColour(weaponColor);
@@ -182,21 +182,20 @@ public class PlayerController : MonoBehaviour {
         isYelling = false;
     }
 
-    IEnumerator Burst(Vector3 shootDir)
+    IEnumerator Burst()
     {
         for (int i = 0; i < 6; i++)
         {
-            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<Projectile>();
-            newProjectile.setDirection(shootDir);
+            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<Projectile>();
+            newProjectile.setDirection(direction);
             newProjectile.setColour(weaponColor);
-            yield return new WaitForSeconds(.15f);
+            yield return new WaitForSeconds(.1f);
         }
     }
 
     IEnumerator ShootShotgun()
     {
         shotgunCanShoot = false;
-        Debug.Log(timeBetweenShotgunShots);
         yield return new WaitForSeconds(timeBetweenShotgunShots);
         shotgunCanShoot = true;
     }

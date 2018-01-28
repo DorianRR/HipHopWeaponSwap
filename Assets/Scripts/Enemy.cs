@@ -143,12 +143,12 @@ public class Enemy : MonoBehaviour {
     }
 
     //Hit by projectile
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (alreadyCollided)
             return;
 
-        alreadyCollided = true;
+
         if(collision.gameObject.tag == thisColour.ToString())
         {
             hitPoints--;
@@ -156,6 +156,7 @@ public class Enemy : MonoBehaviour {
         }
         if(hitPoints<1)
         {
+            alreadyCollided = true;
             gc.registerEnemyDead(originalPlayer);
             Destroy(this.gameObject);
         }
@@ -207,9 +208,14 @@ public class Enemy : MonoBehaviour {
     }
     public void ShotGunHit()
     {
+        if (alreadyCollided)
+            return;
+
+        
         hitPoints--;
         if (hitPoints < 1)
         {
+            alreadyCollided = true;
             gc.registerEnemyDead(originalPlayer);
             Destroy(this.gameObject);
         }
