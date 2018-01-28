@@ -7,11 +7,14 @@ public class PlayerController : MonoBehaviour {
 
     public Projectile projectile;
     public Slider healthSlider;
+    public GameObject player;
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
     public float moveSpeed = 15f;
     public Colour weaponColor;
+    public bool swapLiquor = false;
+    public bool swapWeapon = false;
 
 
     private Vector3 direction;
@@ -78,8 +81,38 @@ public class PlayerController : MonoBehaviour {
         }
         health -= .05f;
         healthSlider.value = health;
-        
-        
+        if (Input.GetButtonDown("SwapLiquor_P1"))
+        {
+            //StartCoroutine(swapLiquor());
+            swapLiquor = true;
+        }
+        if(Input.GetButtonUp("SwapLiquor_P1"))
+        {
+            swapLiquor = false;
+        }
+        if (Input.GetButtonDown("SwapWeapon_P1"))
+        {
+            swapWeapon = true;
+            //StartCoroutine(swapWeapon());
+        }
+        if(Input.GetButtonUp("SwapWeapon_P1"))
+        {
+            swapWeapon = false;
+        }
+
+        if(player.GetComponent<PlayerController2>().swapLiquor)
+        {
+            hasLiquor = (!hasLiquor);
+        }
+
+        if (player.GetComponent<PlayerController2>().swapWeapon)
+        {
+            isShotgun = (!isShotgun);
+        }
+
+
+
+
     }
 
     void Shoot(Vector3 shootDir, bool isShotgun)
@@ -118,5 +151,15 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForSeconds(.15f);
         }
     }
+
+    //IEnumerator swapWeapon()
+    //{
+
+    //}
+
+    //IEnumerator swapLiquor()
+    //{
+
+    //}
 
 }

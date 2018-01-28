@@ -7,11 +7,15 @@ public class PlayerController2 : MonoBehaviour {
 
     public Projectile projectile;
     public Slider healthSlider;
+    public GameObject player;
+
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
     public float moveSpeed = 15f;
     public Colour weaponColor;
+    public bool swapLiquor = false;
+    public bool swapWeapon = false;
 
 
 
@@ -71,11 +75,40 @@ public class PlayerController2 : MonoBehaviour {
                 canShoot = false;
             }
         }
-        healthSlider.value = health;
         if (Input.GetButtonDown("Yell_P2"))
         {
             StartCoroutine(Yell());
         }
+        health -= .05f;
+        healthSlider.value = health;
+        if (Input.GetButtonDown("SwapLiquor_P1"))
+        {
+            //StartCoroutine(swapLiquor());
+            swapLiquor = true;
+        }
+        if (Input.GetButtonUp("SwapLiquor_P1"))
+        {
+            swapLiquor = false;
+        }
+        if (Input.GetButtonDown("SwapWeapon_P1"))
+        {
+            swapWeapon = true;
+            //StartCoroutine(swapWeapon());
+        }
+        if (Input.GetButtonUp("SwapWeapon_P1"))
+        {
+            swapWeapon = false;
+        }
+        if (player.GetComponent<PlayerController2>().swapLiquor)
+        {
+            hasLiquor = (!hasLiquor);
+        }
+
+        if (player.GetComponent<PlayerController2>().swapWeapon)
+        {
+            isShotgun = (!isShotgun);
+        }
+
     }
 
     void Shoot(Vector3 shootDir, bool isShotgun)
