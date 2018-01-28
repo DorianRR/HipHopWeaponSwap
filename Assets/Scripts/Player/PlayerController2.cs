@@ -23,6 +23,8 @@ public class PlayerController2 : MonoBehaviour
     public bool readyToSwapLiquor = false;
     public bool readyToSwapWeapon = false;
     public float timeBetweenShotgunShots = 1f;
+    public Sound soundScript;
+
 
 
 
@@ -48,6 +50,8 @@ public class PlayerController2 : MonoBehaviour
         shotgunCanShoot = true;
         yelling.SetActive(false);
         boozeIcon = GameObject.Find("TossBooze").GetComponent<RawImage>();
+        soundScript = GameObject.Find("GameController").GetComponent<Sound>();
+
 
     }
 
@@ -229,6 +233,8 @@ public class PlayerController2 : MonoBehaviour
 
     private void getHit()
     {
+        soundScript.PlayPlayerHitSoundP2();
+
         health -= 10f;
     }
     private void OnTriggerEnter(Collider other)
@@ -256,6 +262,7 @@ public class PlayerController2 : MonoBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
+            soundScript.PlayLazerSoundP2();
             float yRotation = Vector3.SignedAngle(new Vector3(0, 0, 1), direction, new Vector3(0, 1, 0));
             Quaternion rotation = Quaternion.Euler(90, yRotation, 0);
             Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * direction)), rotation).GetComponent<Projectile>(); newProjectile.setDirection(direction);
@@ -266,6 +273,8 @@ public class PlayerController2 : MonoBehaviour
 
     IEnumerator ShootShotgun()
     {
+        soundScript.PlayShootSound2P2();
+
         shotgunCanShoot = false;
         yield return new WaitForSeconds(timeBetweenShotgunShots);
         shotgunCanShoot = true;
@@ -305,6 +314,8 @@ public class PlayerController2 : MonoBehaviour
 
     public void swapColour()
     {
+        soundScript.PlayThrowGunOrBoozeSoundP1();
+
         if (weaponColor == Colour.Red)
             weaponColor = Colour.Blue;
         else
@@ -312,10 +323,13 @@ public class PlayerController2 : MonoBehaviour
     }
     public void swapLiquor()
     {
+        soundScript.PlayThrowGunOrBoozeSoundP1();
 
         hasLiquor = !hasLiquor;
         if (hasLiquor)
         {
+            soundScript.PlayDrinkBoozeSoundP2();
+
             canMove = false;
             anim.SetBool("caughtWeapon", false);
             anim.SetBool("isCatching", true);
@@ -348,7 +362,10 @@ public class PlayerController2 : MonoBehaviour
 
     IEnumerator DeathSceneLoad()
     {
+        soundScript.PlayPlayerDeathSoundP2();
+
         yield return new WaitForSeconds(2f);
+
         SceneManager.LoadScene(2);
 
     }

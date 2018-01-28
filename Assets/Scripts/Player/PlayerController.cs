@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject yelling;
     public Canvas canvas;
 
+    public Sound soundScript;
+
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun = true;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour {
         shotgunCanShoot = true;
         yelling.SetActive(false);
         boozeIcon = GameObject.Find("TossBooze").GetComponent<RawImage>();
+        soundScript = GameObject.Find("GameController").GetComponent<Sound>();
     }
 
     void Update ()
@@ -202,6 +205,8 @@ public class PlayerController : MonoBehaviour {
         {
             if (shotgunCanShoot)
             {
+                //shotgunCanShoot = false;
+
                 StartCoroutine(ShootShotgun());
                 ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
                 ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
@@ -234,6 +239,7 @@ public class PlayerController : MonoBehaviour {
 
     private void getHit()
     {
+        soundScript.PlayPlayerHitSoundP1();
         health -= 10f;
     }
     private void OnTriggerEnter(Collider other)
@@ -263,6 +269,8 @@ public class PlayerController : MonoBehaviour {
     {
         for (int i = 0; i < 6; i++)
         {
+            soundScript.PlayLazerSoundP1();
+
             float yRotation = Vector3.SignedAngle(new Vector3(0, 0, 1), direction, new Vector3(0, 1, 0));
             Quaternion rotation = Quaternion.Euler(90, yRotation, 0);
             Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * direction)), rotation).GetComponent<Projectile>(); newProjectile.setDirection(direction);
@@ -274,6 +282,8 @@ public class PlayerController : MonoBehaviour {
     IEnumerator ShootShotgun()
     {
         shotgunCanShoot = false;
+
+        soundScript.PlayShootSound2P1();
         yield return new WaitForSeconds(timeBetweenShotgunShots);
         shotgunCanShoot = true;
     }
@@ -314,6 +324,7 @@ public class PlayerController : MonoBehaviour {
 
     public void swapColour()
     {
+        soundScript.PlayThrowGunOrBoozeSoundP1();
         if (weaponColor == Colour.Red)
             weaponColor = Colour.Blue;
         else
@@ -321,9 +332,12 @@ public class PlayerController : MonoBehaviour {
     }
     public void swapLiquor()
     {
+        soundScript.PlayThrowGunOrBoozeSoundP1();
+
         hasLiquor = !hasLiquor;
         if (hasLiquor)
         {
+            soundScript.PlayDrinkBoozeSoundP1();
             canMove = false;
             anim.SetBool("caughtWeapon", false);
             anim.SetBool("isCatching", true);
@@ -358,7 +372,10 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator DeathSceneLoad()
     {
+        soundScript.PlayPlayerDeathSoundP1();
+
         yield return new WaitForSeconds(2f);
+
         SceneManager.LoadScene(2);
 
     }

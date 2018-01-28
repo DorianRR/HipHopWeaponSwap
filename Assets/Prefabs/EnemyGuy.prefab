@@ -1846,8 +1846,8 @@ MonoBehaviour:
   wanderRange: 5
   shootInterval: 0.2
   numberShots: 10
-  redMaterial: {fileID: 2100000, guid: b6f3731e68bc77d40994de3a13e602b6, type: 2}
-  blueMaterial: {fileID: 2100000, guid: 427061042ca997b45a7d86073422fe34, type: 2}
+  redMaterial: {fileID: 2100000, guid: fcc59990f9f751d44b3db986aa9b5be4, type: 2}
+  blueMaterial: {fileID: 2100000, guid: 57a2b1331fe8b074da6822123ce906e7, type: 2}
   hitPoints: 5
   target: {x: 30, y: 0.83, z: 27.45}
   hasSwapped: 0
