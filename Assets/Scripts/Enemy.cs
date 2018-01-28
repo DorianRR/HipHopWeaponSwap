@@ -30,10 +30,16 @@ public class Enemy : MonoBehaviour {
     private GameObject targetPlayer;
     private GameObject originalPlayer;
     public float enemyProjectileSpeed;
+    private Animator anim;
+    private Vector3 directionFace;
+    private Quaternion rotation;
 
     private bool alreadyCollided;
 
+    private bool enemyFiring;
+
     void Start () {
+        anim = gameObject.GetComponentInChildren<Animator>();
         currState = State.walk;
         projectileHolder = GameObject.Find("Projectiles");
         playerPosition = targetPlayer.transform.position;
@@ -43,6 +49,8 @@ public class Enemy : MonoBehaviour {
             GetComponent<Renderer>().material = redMaterial;
         else if (thisColour == Colour.Blue)
             GetComponent<Renderer>().material = blueMaterial;
+
+        enemyFiring = false;
     }
 
     // Update is called once per frame
@@ -52,27 +60,51 @@ public class Enemy : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(0))
         {
+            anim.SetBool("isFiring", true);
+            enemyFiring = true;
+
             fire(Vector3.right);
         }
 
         if (currState == State.walk)
         {
+            anim.SetBool("isFiring", false);
+            enemyFiring = false;
+            anim.SetBool("isMoving", true);
             StartCoroutine("handleWalking");
         }
         else if (currState == State.shoot)
         {
+            anim.SetBool("isMoving", false);
+            anim.SetBool("isFiring", true);
+            enemyFiring = true;
+
             StartCoroutine("handleShooting");
         }
         else if (currState == State.stand)
         {
+
             StartCoroutine("handleStanding");
         }
         else if (currState == State.pending)
         {
-
-        }
         
-	}
+        }
+        //rotation = Quaternion.LookRotation(-target);
+        //if()
+
+        
+    }
+
+    private void LateUpdate()
+    {
+        if (enemyFiring)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((playerPosition - transform.position).normalized), 1.0f);
+        else
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((target - transform.position).normalized), .75f);
+        }
+    }
 
 
     IEnumerator handleShooting()
@@ -92,12 +124,13 @@ public class Enemy : MonoBehaviour {
             moveRandomly();
             currState = State.walk;
         }
-
+        
         yield return null;
     }
 
     IEnumerator handleStanding()
     {
+
         currState = State.pending;
 
         yield return new WaitForSeconds(shootInterval);
@@ -127,6 +160,9 @@ public class Enemy : MonoBehaviour {
 
     void fire(Vector3 fireDirection)
     {
+        anim.SetBool("isFiring", true);
+        enemyFiring = true;
+
         Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
         newProjectile.transform.SetParent(projectileHolder.transform);
         newProjectile.setDirection(fireDirection);
@@ -134,6 +170,9 @@ public class Enemy : MonoBehaviour {
     }
     void fireAtPlayer()
     {
+        anim.SetBool("isFiring", true);
+        enemyFiring = true;
+
         Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
         newProjectile.transform.SetParent(projectileHolder.transform);
         Vector3 direction = playerPosition - transform.position;
@@ -143,12 +182,11 @@ public class Enemy : MonoBehaviour {
     }
 
     //Hit by projectile
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (alreadyCollided)
             return;
 
-        alreadyCollided = true;
         if(collision.gameObject.tag == thisColour.ToString())
         {
             hitPoints--;
@@ -156,6 +194,7 @@ public class Enemy : MonoBehaviour {
         }
         if(hitPoints<1)
         {
+            alreadyCollided = true;
             gc.registerEnemyDead(originalPlayer);
             Destroy(this.gameObject);
         }
@@ -193,12 +232,27 @@ public class Enemy : MonoBehaviour {
         this.gc = gc;
         this.targetPlayer = player;
         this.originalPlayer = player;
+        int prob = Random.Range(0, 100);
+        if (prob < 50)
+        {
+            this.GetComponent<Renderer>().material = redMaterial;
+            thisColour = Colour.Red;
+        }
+        else
+        {
+            this.GetComponent<Renderer>().material = blueMaterial;
+            thisColour = Colour.Blue;
+        }
+
     }
     public void ShotGunHit()
     {
+        if (alreadyCollided)
+            return;
         hitPoints--;
         if (hitPoints < 1)
         {
+            alreadyCollided = true;
             gc.registerEnemyDead(originalPlayer);
             Destroy(this.gameObject);
         }

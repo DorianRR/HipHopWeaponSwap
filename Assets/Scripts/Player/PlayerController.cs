@@ -8,14 +8,17 @@ public class PlayerController : MonoBehaviour {
     public Projectile projectile;
     public ShotgunProjectile shotgunProjectile;
     public Slider healthSlider;
-    public GameObject player;
+    public GameObject otherPlayer;
+    public GameObject yelling;
+    public Canvas canvas;
+
     public bool isYelling = false;
     public bool hasLiquor;
-    public bool isShotgun;
+    public bool isShotgun = true;
     public float moveSpeed = 15f;
     public Colour weaponColor;
-    public bool swapLiquor = false;
-    public bool swapWeapon = false;
+    public bool readyToSwapLiquor = false;
+    public bool readyToSwapWeapon = false;
     public float timeBetweenShotgunShots = 1f;
 
 
@@ -24,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     private Quaternion rotation;
     private float health;
     private bool canShoot = true;
-    private float timeRest = 2f;
+    private float timeRest = 1.2f;
     private float time = 0;
     private bool shotgunCanShoot;
 
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour {
         direction = new Vector3(0, 0, 1);
         health = 100f;
         shotgunCanShoot = true;
-
+        yelling.SetActive(false);
 
     }
 
@@ -54,9 +57,7 @@ public class PlayerController : MonoBehaviour {
             rotation = Quaternion.LookRotation(direction);
             transform.rotation = rotation;
         }
-
-        //direction = new Vector3(Input.GetAxis("RightStickX_P1"), 0, Input.GetAxis("RightStickY_P1"));
-        //direction.Normalize();
+        
         if (Input.GetAxis("Horizontal_P1") > 0 || Input.GetAxis("Horizontal_P1") < 0 || Input.GetAxis("Vertical_P1") < 0 || Input.GetAxis("Vertical_P1") > 0)
         {
             gameObject.GetComponent<Rigidbody>().constraints =  
@@ -74,9 +75,9 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetAxisRaw("3rd axis P_1") > 0)
         {
-            if (canShoot)
+            if (canShoot || isShotgun)
             {
-                Shoot(direction, isShotgun);
+                Shoot(isShotgun);
                 canShoot = false;
             }
             
@@ -89,35 +90,39 @@ public class PlayerController : MonoBehaviour {
      
         if (Input.GetButtonDown("SwapLiquor_P1"))
         {
-            //StartCoroutine(swapLiquor());
-            swapLiquor = true;
+            readyToSwapLiquor = true;
         }
         if(Input.GetButtonUp("SwapLiquor_P1"))
         {
-            swapLiquor = false;
+            readyToSwapLiquor = false;
         }
         if (Input.GetButtonDown("SwapWeapon_P1"))
         {
-            swapWeapon = true;
-            //StartCoroutine(swapWeapon());
+            readyToSwapWeapon = true;
+            StartCoroutine(BlinkingWeapon());
         }
         if(Input.GetButtonUp("SwapWeapon_P1"))
         {
-            swapWeapon = false;
+            readyToSwapWeapon = false;
         }
 
-        if(player.GetComponent<PlayerController2>().swapLiquor)
+        if (otherPlayer.GetComponent<PlayerController2>().readyToSwapLiquor && readyToSwapLiquor)
         {
-            hasLiquor = (!hasLiquor);
-            if(hasLiquor)
-            {
-                health = 100;
-            }
+            swapLiquor();
+
+            readyToSwapLiquor = false;
+            otherPlayer.GetComponent<PlayerController2>().readyToSwapLiquor = false;
+            otherPlayer.GetComponent<PlayerController2>().swapLiquor();
         }
 
-        if (player.GetComponent<PlayerController2>().swapWeapon)
+        if (otherPlayer.GetComponent<PlayerController2>().readyToSwapWeapon && readyToSwapWeapon)
         {
             isShotgun = (!isShotgun);
+            swapColour();
+            otherPlayer.GetComponent<PlayerController2>().readyToSwapWeapon = false;
+            readyToSwapWeapon = false;
+            otherPlayer.GetComponent<PlayerController2>().isShotgun = !otherPlayer.GetComponent<PlayerController2>().isShotgun;
+            otherPlayer.GetComponent<PlayerController2>().swapColour();
         }
 
         health -= .05f;
@@ -126,32 +131,32 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    void Shoot(Vector3 shootDir, bool isShotgun)
+    void Shoot(bool isShotgun)
     {
         if(!isShotgun)
         {
-            StartCoroutine(Burst(shootDir));
+            StartCoroutine(Burst());
         }
         else
         {
             if (shotgunCanShoot)
             {
                 StartCoroutine(ShootShotgun());
-                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
 
-                newProjectile.setDirection(shootDir);
-                newProjectile2.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile3.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile4.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile5.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile6.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile7.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile.setDirection(direction);
+                newProjectile2.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile3.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile4.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile5.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile6.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile7.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
 
                 newProjectile.setColour(weaponColor);
                 newProjectile2.setColour(weaponColor);
@@ -174,18 +179,21 @@ public class PlayerController : MonoBehaviour {
     IEnumerator Yell()
     {
         isYelling = true;
-        yield return new WaitForSeconds(2f);
+        yelling.SetActive(true);
+        yield return new WaitForSeconds(5f);
         isYelling = false;
+        yelling.SetActive(false);
+
     }
 
-    IEnumerator Burst(Vector3 shootDir)
+    IEnumerator Burst()
     {
         for (int i = 0; i < 6; i++)
         {
-            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<Projectile>();
-            newProjectile.setDirection(shootDir);
+            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<Projectile>();
+            newProjectile.setDirection(direction);
             newProjectile.setColour(weaponColor);
-            yield return new WaitForSeconds(.15f);
+            yield return new WaitForSeconds(.1f);
         }
     }
 
@@ -196,14 +204,44 @@ public class PlayerController : MonoBehaviour {
         shotgunCanShoot = true;
     }
 
-    //IEnumerator swapWeapon()
-    //{
+    IEnumerator BlinkingWeapon()
+    {
+        if(isShotgun)
+        {
+            GameObject temp = canvas.transform.Find("Weapon1_P1").gameObject;
+            for(int i = 0; i < 10; i++)
+            {
+                temp.SetActive(!temp.activeSelf);
+                yield return new WaitForSeconds(.25f);
+            }
+        }
+        else
+        {
 
-    //}
+            GameObject temp = canvas.transform.Find("Weapon2_P1").gameObject;
+            for (int i = 0; i < 10; i++)
+            {
+                temp.SetActive(!temp.activeSelf);
+                yield return new WaitForSeconds(.25f);
+            }
+        }
 
-    //IEnumerator swapLiquor()
-    //{
+    }
 
-    //}
+    public void swapColour()
+    {
+        if (weaponColor == Colour.Red)
+            weaponColor = Colour.Blue;
+        else
+            weaponColor = Colour.Red;
+    }
+    public void swapLiquor()
+    {
+        hasLiquor = !hasLiquor;
+        if (hasLiquor)
+            health = 100;
+    }
+
+
 
 }
