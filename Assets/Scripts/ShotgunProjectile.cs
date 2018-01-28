@@ -42,7 +42,7 @@ public class ShotgunProjectile : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        if(collider.gameObject.tag == "Bad" && (collider.GetComponent<Enemy>().thisColour.ToString() == this.tag))
+        if(collider.gameObject.tag == "Bad" && (collider.GetComponent<Enemy>().thisColour.ToString() == tag))
         {
             collider.gameObject.GetComponent<Enemy>().ShotGunHit();
             Destroy(this.gameObject);

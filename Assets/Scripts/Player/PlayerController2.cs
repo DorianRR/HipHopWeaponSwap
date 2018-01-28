@@ -8,21 +8,21 @@ public class PlayerController2 : MonoBehaviour {
     public Projectile projectile;
     public ShotgunProjectile shotgunProjectile;
     public Slider healthSlider;
-    public GameObject player;
+    public GameObject otherPlayer;
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
     public float moveSpeed = 15f;
     public Colour weaponColor;
-    public bool swapLiquor = false;
-    public bool swapWeapon = false;
+    public bool readyToSwapLiquor = false;
+    public bool readyToSwapWeapon = false;
     public float timeBetweenShotgunShots = 0.3f;
 
 
     
     private Vector3 direction;
     private Quaternion rotation;
-    private float health;
+    float health;
     private bool canShoot = true;
     private float timeRest = 2f;
     private float time = 0;
@@ -85,36 +85,41 @@ public class PlayerController2 : MonoBehaviour {
             StartCoroutine(Yell());
         }
         
-        if (Input.GetButtonDown("SwapLiquor_P1"))
+        if (Input.GetButtonDown("SwapLiquor_P2"))
         {
-            //StartCoroutine(swapLiquor());
-            swapLiquor = true;
+
+            readyToSwapLiquor = true;
         }
-        if (Input.GetButtonUp("SwapLiquor_P1"))
+        if (Input.GetButtonUp("SwapLiquor_P2"))
         {
-            swapLiquor = false;
+            readyToSwapLiquor = false;
         }
-        if (Input.GetButtonDown("SwapWeapon_P1"))
+        if (Input.GetButtonDown("SwapWeapon_P2"))
         {
-            swapWeapon = true;
-            //StartCoroutine(swapWeapon());
+            readyToSwapWeapon = true;
+
         }
-        if (Input.GetButtonUp("SwapWeapon_P1"))
+        if (Input.GetButtonUp("SwapWeapon_P2"))
         {
-            swapWeapon = false;
+            readyToSwapWeapon = false;
         }
-        if (player.GetComponent<PlayerController>().swapLiquor)
+        if (otherPlayer.GetComponent<PlayerController>().readyToSwapLiquor && readyToSwapLiquor)
         {
-            hasLiquor = (!hasLiquor);
-            if (hasLiquor)
-            {
-                health = 100;
-            }
+            swapLiquor();
+
+            readyToSwapLiquor = false;
+            otherPlayer.GetComponent<PlayerController>().readyToSwapLiquor = false;
+            otherPlayer.GetComponent<PlayerController>().swapLiquor();
         }
 
-        if (player.GetComponent<PlayerController>().swapWeapon)
+        if (otherPlayer.GetComponent<PlayerController>().readyToSwapWeapon && readyToSwapWeapon)
         {
             isShotgun = (!isShotgun);
+            swapColour();
+            otherPlayer.GetComponent<PlayerController>().readyToSwapWeapon = false;
+            readyToSwapWeapon = false;
+            otherPlayer.GetComponent<PlayerController>().isShotgun = !otherPlayer.GetComponent<PlayerController>().isShotgun;
+            otherPlayer.GetComponent<PlayerController>().swapColour();
         }
         health -= .05f;
         healthSlider.value = health;
@@ -187,5 +192,18 @@ public class PlayerController2 : MonoBehaviour {
             newProjectile.setColour(weaponColor);
             yield return new WaitForSeconds(.15f);
         }
+    }
+    public void swapColour()
+    {
+        if (weaponColor == Colour.Red)
+            weaponColor = Colour.Blue;
+        else
+            weaponColor = Colour.Red;
+    }
+    public void swapLiquor()
+    {
+        hasLiquor = !hasLiquor;
+        if (hasLiquor)
+            health = 100;
     }
 }

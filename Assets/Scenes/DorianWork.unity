@@ -734,14 +734,14 @@ MonoBehaviour:
   shotgunProjectile: {fileID: 114232899910017804, guid: 91e23394d6e35614f8e8a3c37f18cce5,
     type: 2}
   healthSlider: {fileID: 34817128}
-  player: {fileID: 1582915778}
+  otherPlayer: {fileID: 1582915778}
   isYelling: 0
   hasLiquor: 0
   isShotgun: 0
   moveSpeed: 15
   weaponColor: 0
-  swapLiquor: 0
-  swapWeapon: 0
+  readyToSwapLiquor: 0
+  readyToSwapWeapon: 0
   timeBetweenShotgunShots: 0.3
 --- !u!1 &382110734 stripped
 GameObject:
@@ -1662,14 +1662,14 @@ MonoBehaviour:
   shotgunProjectile: {fileID: 114232899910017804, guid: 91e23394d6e35614f8e8a3c37f18cce5,
     type: 2}
   healthSlider: {fileID: 38856742}
-  player: {fileID: 335974237}
+  otherPlayer: {fileID: 335974237}
   isYelling: 0
   hasLiquor: 1
   isShotgun: 1
   moveSpeed: 15
   weaponColor: 1
-  swapLiquor: 0
-  swapWeapon: 0
+  readyToSwapLiquor: 0
+  readyToSwapWeapon: 0
   timeBetweenShotgunShots: 0.3
 --- !u!1 &1772168195
 GameObject:
