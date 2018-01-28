@@ -213,6 +213,10 @@ public class PlayerController2 : MonoBehaviour
             for (int i = 0; i < 10; i++)
             {
                 temp.SetActive(!temp.activeSelf);
+                if (!isShotgun)
+                {
+                    break;
+                }
                 yield return new WaitForSeconds(.25f);
             }
         }
@@ -223,6 +227,10 @@ public class PlayerController2 : MonoBehaviour
             for (int i = 0; i < 10; i++)
             {
                 temp.SetActive(!temp.activeSelf);
+                if (isShotgun)
+                {
+                    break;
+                }
                 yield return new WaitForSeconds(.25f);
             }
         }
@@ -243,6 +251,13 @@ public class PlayerController2 : MonoBehaviour
             health = 100;
     }
 
+    public void SwapWeaponUI()
+    {
+        GameObject temp = canvas.transform.Find("Weapon1_P2").gameObject;
+        temp.SetActive(!temp.activeSelf);
+        temp = canvas.transform.Find("Weapon2_P2").gameObject;
+        temp.SetActive(!temp.activeSelf);
+    }
 
 
 }

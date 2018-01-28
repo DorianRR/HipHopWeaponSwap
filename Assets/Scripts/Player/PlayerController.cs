@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
                 RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         }
 
-        if (Input.GetAxisRaw("3rd axis P_1") > 0)
+        if (Input.GetAxisRaw("3rd axis P_1") > 0 || Input.GetMouseButtonDown(0))
         {
             if (canShoot || isShotgun)
             {
@@ -117,12 +117,17 @@ public class PlayerController : MonoBehaviour {
 
         if (otherPlayer.GetComponent<PlayerController2>().readyToSwapWeapon && readyToSwapWeapon)
         {
+            SwapWeaponUI();
+            otherPlayer.GetComponent<PlayerController2>().SwapWeaponUI();
             isShotgun = (!isShotgun);
             swapColour();
             otherPlayer.GetComponent<PlayerController2>().readyToSwapWeapon = false;
             readyToSwapWeapon = false;
             otherPlayer.GetComponent<PlayerController2>().isShotgun = !otherPlayer.GetComponent<PlayerController2>().isShotgun;
             otherPlayer.GetComponent<PlayerController2>().swapColour();
+
+
+
         }
 
         health -= .05f;
@@ -212,6 +217,10 @@ public class PlayerController : MonoBehaviour {
             for(int i = 0; i < 10; i++)
             {
                 temp.SetActive(!temp.activeSelf);
+                if(!isShotgun)
+                {
+                    break;
+                }
                 yield return new WaitForSeconds(.25f);
             }
         }
@@ -221,7 +230,13 @@ public class PlayerController : MonoBehaviour {
             GameObject temp = canvas.transform.Find("Weapon2_P1").gameObject;
             for (int i = 0; i < 10; i++)
             {
+
                 temp.SetActive(!temp.activeSelf);
+
+                if (isShotgun)
+                {
+                    break;
+                }
                 yield return new WaitForSeconds(.25f);
             }
         }
@@ -242,6 +257,12 @@ public class PlayerController : MonoBehaviour {
             health = 100;
     }
 
-
+    void SwapWeaponUI()
+    {
+        GameObject temp = canvas.transform.Find("Weapon1_P1").gameObject;
+        temp.SetActive(!temp.activeSelf);
+        temp = canvas.transform.Find("Weapon2_P1").gameObject;
+        temp.SetActive(!temp.activeSelf);
+    }
 
 }

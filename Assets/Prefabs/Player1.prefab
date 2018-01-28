@@ -384,16 +384,17 @@ MonoBehaviour:
   shotgunProjectile: {fileID: 114232899910017804, guid: 91e23394d6e35614f8e8a3c37f18cce5,
     type: 2}
   healthSlider: {fileID: 0}
-  player: {fileID: 0}
+  otherPlayer: {fileID: 0}
   yelling: {fileID: 1911205340228866}
+  canvas: {fileID: 0}
   isYelling: 0
-  hasLiquor: 0
+  hasLiquor: 1
   isShotgun: 0
   moveSpeed: 15
   weaponColor: 1
-  swapLiquor: 0
-  swapWeapon: 0
-  timeBetweenShotgunShots: 1
+  readyToSwapLiquor: 0
+  readyToSwapWeapon: 0
+  timeBetweenShotgunShots: 0.65
 --- !u!136 &136499915912548842
 CapsuleCollider:
   m_ObjectHideFlags: 1
