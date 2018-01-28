@@ -1471,7 +1471,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1925878964888700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7607338, y: -3.4279602, z: -10.347731}
+  m_LocalPosition: {x: 18.207819, y: 1.3205991, z: -3.9192553}
   m_LocalScale: {x: 1.5, y: 2, z: 1.5}
   m_Children:
   - {fileID: 4115660695215636}
@@ -1842,13 +1842,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1378050001568968, guid: b0dc452ecdf6b074a9b999e4512a6a5d, type: 2}
-  walkSpeed: 5
-  wanderRange: 5
-  shootInterval: 0.2
-  numberShots: 10
+  walkSpeed: 10
+  wanderRange: 8
+  shootInterval: 0.5
+  numberShots: 8
   redMaterial: {fileID: 2100000, guid: fcc59990f9f751d44b3db986aa9b5be4, type: 2}
   blueMaterial: {fileID: 2100000, guid: 57a2b1331fe8b074da6822123ce906e7, type: 2}
-  hitPoints: 5
+  hitPoints: 3
   target: {x: 30, y: 0.83, z: 27.45}
   hasSwapped: 0
   thisColour: 1

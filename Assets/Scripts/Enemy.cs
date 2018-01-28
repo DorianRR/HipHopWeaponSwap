@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour {
     void fire(Vector3 fireDirection)
     {
         Vector3 gunPosition = transform.position;
-        gunPosition.y = +GetComponent<CapsuleCollider>().height * 0.75f;
+        gunPosition.y = +GetComponent<CapsuleCollider>().height * 1.5f;
 
         anim.SetBool("isFiring", true);
         enemyFiring = true;

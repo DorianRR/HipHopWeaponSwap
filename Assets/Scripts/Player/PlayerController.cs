@@ -206,15 +206,17 @@ public class PlayerController : MonoBehaviour {
             if (shotgunCanShoot)
             {
                 //shotgunCanShoot = false;
+                Vector3 gunPosition = transform.position;
+                gunPosition.y += GetComponent<CapsuleCollider>().height * 1.5f;
 
                 StartCoroutine(ShootShotgun());
-                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (gunPosition + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (gunPosition + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (gunPosition + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (gunPosition + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (gunPosition + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (gunPosition + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (gunPosition + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
 
                 newProjectile.setDirection(direction);
                 newProjectile2.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
@@ -269,11 +271,13 @@ public class PlayerController : MonoBehaviour {
     {
         for (int i = 0; i < 6; i++)
         {
-            soundScript.PlayLazerSoundP1();
 
+            soundScript.PlayLazerSoundP1();
+            Vector3 gunPosition = transform.position;
+            gunPosition.y += GetComponent<CapsuleCollider>().height * 1.5f;
             float yRotation = Vector3.SignedAngle(new Vector3(0, 0, 1), direction, new Vector3(0, 1, 0));
             Quaternion rotation = Quaternion.Euler(90, yRotation, 0);
-            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * direction)), rotation).GetComponent<Projectile>(); newProjectile.setDirection(direction);
+            Projectile newProjectile = Instantiate(projectile, (gunPosition + (direction)), rotation).GetComponent<Projectile>(); newProjectile.setDirection(direction);
             newProjectile.setColour(weaponColor);
             yield return new WaitForSeconds(.1f);
         }
@@ -343,10 +347,10 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isCatching", true);
             anim.SetBool("hasLiquor", hasLiquor);
             StartCoroutine(canMoveTrue());
+            health = 100;
 
         }
 
-        health = 100;
     }
 
     void SwapWeaponUI()
