@@ -10,10 +10,11 @@ public class PlayerController : MonoBehaviour {
     public Slider healthSlider;
     public GameObject player;
     public GameObject yelling;
+    public Canvas canvas;
 
     public bool isYelling = false;
     public bool hasLiquor;
-    public bool isShotgun;
+    public bool isShotgun = true;
     public float moveSpeed = 15f;
     public Colour weaponColor;
     public bool swapLiquor = false;
@@ -101,6 +102,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("SwapWeapon_P1"))
         {
             swapWeapon = true;
+            StartCoroutine(BlinkingWeapon());
             //StartCoroutine(swapWeapon());
         }
         if(Input.GetButtonUp("SwapWeapon_P1"))
@@ -201,6 +203,30 @@ public class PlayerController : MonoBehaviour {
         shotgunCanShoot = true;
     }
 
+    IEnumerator BlinkingWeapon()
+    {
+        //isShotgun = false;
+        if(isShotgun)
+        {
+            GameObject temp = canvas.transform.Find("Weapon1_P1").gameObject;
+            for(int i = 0; i < 10; i++)
+            {
+                temp.SetActive(!temp.activeSelf);
+                yield return new WaitForSeconds(.25f);
+            }
+        }
+        else
+        {
+
+            GameObject temp = canvas.transform.Find("Weapon2_P1").gameObject;
+            for (int i = 0; i < 10; i++)
+            {
+                temp.SetActive(!temp.activeSelf);
+                yield return new WaitForSeconds(.25f);
+            }
+        }
+
+    }
     //IEnumerator swapWeapon()
     //{
 
