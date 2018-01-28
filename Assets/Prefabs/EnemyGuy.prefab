@@ -2053,7 +2053,7 @@ MonoBehaviour:
   blueMaterial: {fileID: 2100000, guid: 427061042ca997b45a7d86073422fe34, type: 2}
   hitPoints: 5
   target: {x: 30, y: 0.83, z: 27.45}
-  thisColour: 1
+  thisColour: 0
   enemyProjectileSpeed: 10
 --- !u!136 &136150819603211098
 CapsuleCollider:

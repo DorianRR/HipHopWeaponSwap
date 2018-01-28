@@ -8,28 +8,32 @@ public class PlayerController2 : MonoBehaviour {
     public Projectile projectile;
     public ShotgunProjectile shotgunProjectile;
     public Slider healthSlider;
+<<<<<<< HEAD
     public GameObject player;
     public GameObject yelling;
     public Canvas canvas;
 
 
+=======
+    public GameObject otherPlayer;
+>>>>>>> origin/poopythesecond
     public bool isYelling = false;
     public bool hasLiquor;
     public bool isShotgun;
     public float moveSpeed = 15f;
     public Colour weaponColor;
-    public bool swapLiquor = false;
-    public bool swapWeapon = false;
-    public float timeBetweenShotgunShots = 1f;
+    public bool readyToSwapLiquor = false;
+    public bool readyToSwapWeapon = false;
+    public float timeBetweenShotgunShots = 0.3f;
 
 
 
     
     private Vector3 direction;
     private Quaternion rotation;
-    private float health;
+    float health;
     private bool canShoot = true;
-    private float timeRest = 2f;
+    private float timeRest = 1.2f;
     private float time = 0;
     private bool shotgunCanShoot;
 
@@ -79,9 +83,9 @@ public class PlayerController2 : MonoBehaviour {
 
         if (Input.GetAxisRaw("3rd axis P_2") > 0)
         {
-            if (canShoot)
+            if (canShoot || isShotgun)
             {
-                Shoot(direction, isShotgun);
+                Shoot(isShotgun);
                 canShoot = false;
             }
         }
@@ -90,69 +94,79 @@ public class PlayerController2 : MonoBehaviour {
             StartCoroutine(Yell());
         }
         
-        if (Input.GetButtonDown("SwapLiquor_P1"))
+        if (Input.GetButtonDown("SwapLiquor_P2"))
         {
-            //StartCoroutine(swapLiquor());
-            swapLiquor = true;
+
+            readyToSwapLiquor = true;
         }
-        if (Input.GetButtonUp("SwapLiquor_P1"))
+        if (Input.GetButtonUp("SwapLiquor_P2"))
         {
-            swapLiquor = false;
+            readyToSwapLiquor = false;
         }
-        if (Input.GetButtonDown("SwapWeapon_P1"))
+        if (Input.GetButtonDown("SwapWeapon_P2"))
         {
+<<<<<<< HEAD
             swapWeapon = true;
             StartCoroutine(BlinkingWeapon());
 
             //StartCoroutine(swapWeapon());
+=======
+            readyToSwapWeapon = true;
+
+>>>>>>> origin/poopythesecond
         }
-        if (Input.GetButtonUp("SwapWeapon_P1"))
+        if (Input.GetButtonUp("SwapWeapon_P2"))
         {
-            swapWeapon = false;
+            readyToSwapWeapon = false;
         }
-        if (player.GetComponent<PlayerController>().swapLiquor)
+        if (otherPlayer.GetComponent<PlayerController>().readyToSwapLiquor && readyToSwapLiquor)
         {
-            hasLiquor = (!hasLiquor);
-            if (hasLiquor)
-            {
-                health = 100;
-            }
+            swapLiquor();
+
+            readyToSwapLiquor = false;
+            otherPlayer.GetComponent<PlayerController>().readyToSwapLiquor = false;
+            otherPlayer.GetComponent<PlayerController>().swapLiquor();
         }
 
-        if (player.GetComponent<PlayerController>().swapWeapon)
+        if (otherPlayer.GetComponent<PlayerController>().readyToSwapWeapon && readyToSwapWeapon)
         {
             isShotgun = (!isShotgun);
+            swapColour();
+            otherPlayer.GetComponent<PlayerController>().readyToSwapWeapon = false;
+            readyToSwapWeapon = false;
+            otherPlayer.GetComponent<PlayerController>().isShotgun = !otherPlayer.GetComponent<PlayerController>().isShotgun;
+            otherPlayer.GetComponent<PlayerController>().swapColour();
         }
         health -= .05f;
         healthSlider.value = health;
     }
 
-    void Shoot(Vector3 shootDir, bool isShotgun)
+    void Shoot(bool isShotgun)
     {
         if (!isShotgun)
         {
-            StartCoroutine(Burst(shootDir));
+            StartCoroutine(Burst());
         }
         else
         {
             if (shotgunCanShoot)
             {
                 StartCoroutine(ShootShotgun());
-                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
-                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile2 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile3 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile4 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile5 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile6 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
+                ShotgunProjectile newProjectile7 = Instantiate(shotgunProjectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<ShotgunProjectile>();
 
-                newProjectile.setDirection(shootDir);
-                newProjectile2.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile3.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile4.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile5.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile6.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
-                newProjectile7.setDirection(shootDir + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile.setDirection(direction);
+                newProjectile2.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile3.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile4.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile5.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile6.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
+                newProjectile7.setDirection(direction + new Vector3(Random.Range(-.25f, .25f), 0, Random.Range(-.25f, .25f)));
 
                 newProjectile.setColour(weaponColor);
                 newProjectile2.setColour(weaponColor);
@@ -187,16 +201,17 @@ public class PlayerController2 : MonoBehaviour {
         shotgunCanShoot = true;
     }
 
-    IEnumerator Burst(Vector3 shootDir)
+    IEnumerator Burst()
     {
         for (int i = 0; i < 6; i++)
         {
-            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * shootDir)), Quaternion.identity).GetComponent<Projectile>();
-            newProjectile.setDirection(shootDir);
+            Projectile newProjectile = Instantiate(projectile, (transform.position + (5 * direction)), Quaternion.identity).GetComponent<Projectile>();
+            newProjectile.setDirection(direction);
             newProjectile.setColour(weaponColor);
-            yield return new WaitForSeconds(.15f);
+            yield return new WaitForSeconds(.1f);
         }
     }
+<<<<<<< HEAD
 
     IEnumerator BlinkingWeapon()
     {
@@ -220,5 +235,19 @@ public class PlayerController2 : MonoBehaviour {
             }
         }
 
+=======
+    public void swapColour()
+    {
+        if (weaponColor == Colour.Red)
+            weaponColor = Colour.Blue;
+        else
+            weaponColor = Colour.Red;
+    }
+    public void swapLiquor()
+    {
+        hasLiquor = !hasLiquor;
+        if (hasLiquor)
+            health = 100;
+>>>>>>> origin/poopythesecond
     }
 }

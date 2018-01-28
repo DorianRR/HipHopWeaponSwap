@@ -182,12 +182,12 @@ public class Enemy : MonoBehaviour {
     }
 
     //Hit by projectile
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (alreadyCollided)
             return;
 
-        alreadyCollided = true;
+
         if(collision.gameObject.tag == thisColour.ToString())
         {
             hitPoints--;
@@ -195,6 +195,7 @@ public class Enemy : MonoBehaviour {
         }
         if(hitPoints<1)
         {
+            alreadyCollided = true;
             gc.registerEnemyDead(originalPlayer);
             Destroy(this.gameObject);
         }
@@ -232,12 +233,28 @@ public class Enemy : MonoBehaviour {
         this.gc = gc;
         this.targetPlayer = player;
         this.originalPlayer = player;
+        int prob = Random.Range(0, 100);
+        if(prob<50)
+        {
+            this.GetComponent<Renderer>().material = redMaterial;
+            thisColour = Colour.Red;
+        }
+        else
+        {
+            this.GetComponent<Renderer>().material = blueMaterial;
+            thisColour = Colour.Blue;
+        }
     }
     public void ShotGunHit()
     {
+        if (alreadyCollided)
+            return;
+
+        
         hitPoints--;
         if (hitPoints < 1)
         {
+            alreadyCollided = true;
             gc.registerEnemyDead(originalPlayer);
             Destroy(this.gameObject);
         }

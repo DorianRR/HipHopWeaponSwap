@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     public int doorsPerSide;
     public Vector3[] leftSpawnPositions;
@@ -21,7 +22,8 @@ public class GameController : MonoBehaviour {
     private int enemiesDead;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         Vector3[] leftSpawnPositions = new Vector3[doorsPerSide];
         Vector3[] rightSpawnPositions = new Vector3[doorsPerSide];
         Vector3[] leftMovePositions = new Vector3[doorsPerSide];
@@ -31,7 +33,8 @@ public class GameController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
     }
     private void OnDrawGizmos()
@@ -53,7 +56,7 @@ public class GameController : MonoBehaviour {
 
     private void spawnWavelet()
     {
-        for (int i=0; i<enemiesPerWaveletPerSide[currWave]; i++)
+        for (int i = 0; i < enemiesPerWaveletPerSide[currWave]; i++)
         {
             Enemy newEnemy = Instantiate(enemy, leftSpawnPositions[i], Quaternion.identity).GetComponent<Enemy>();
             newEnemy.setInitialMovement(leftMovePositions[i]);
@@ -67,17 +70,17 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void registerEnemyDead( GameObject side )
+    public void registerEnemyDead(GameObject side)
     {
         enemiesDead++;
         Debug.Log("enemies killed: " + enemiesDead);
         Debug.Log("Wave Number" + currWave);
-        if ( enemiesSpawned < totalEnemiesPerWave[currWave])
+        if (enemiesSpawned < totalEnemiesPerWave[currWave])
         {
             spawnNewEnemy(side);
 
         }
-        else if (enemiesDead>=totalEnemiesPerWave[currWave])
+        else if (enemiesDead >= totalEnemiesPerWave[currWave])
         {
             Debug.Log("Wave over!");
             StartCoroutine(waveBreak());
@@ -94,7 +97,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    private void spawnNewEnemy ( GameObject side )
+    private void spawnNewEnemy(GameObject side)
     {
         int door = Random.Range(0, doorsPerSide);
         Enemy newEnemy;
