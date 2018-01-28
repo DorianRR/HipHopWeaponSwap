@@ -112,16 +112,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1571362804862464, guid: 0beea4ecaf4c5854ebc92eb6a4d9e881, type: 2}
-  playerOne: {fileID: 1410544377293398, guid: b09e70670579aac4594725b028ee4876, type: 2}
   walkSpeed: 5
   wanderRange: 5
-  shootInterval: 0.3
+  shootInterval: 0.2
   numberShots: 10
+  redMaterial: {fileID: 2100000, guid: b6f3731e68bc77d40994de3a13e602b6, type: 2}
+  blueMaterial: {fileID: 2100000, guid: 427061042ca997b45a7d86073422fe34, type: 2}
   hitPoints: 5
   target: {x: 30, y: 0.83, z: 27.45}
   thisColour: 1
-  redMaterial: {fileID: 2100000, guid: b6f3731e68bc77d40994de3a13e602b6, type: 2}
-  blueMaterial: {fileID: 2100000, guid: 427061042ca997b45a7d86073422fe34, type: 2}
+  enemyProjectileSpeed: 10
 --- !u!136 &136003585519078010
 CapsuleCollider:
   m_ObjectHideFlags: 1

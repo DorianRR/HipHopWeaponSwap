@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1052,7 +1052,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 114191466719367596, guid: 0beea4ecaf4c5854ebc92eb6a4d9e881,
     type: 2}
-  weaponColour: 0
+  healthSlider: {fileID: 0}
+  isYelling: 0
+  hasLiquor: 0
+  isShotgun: 0
+  moveSpeed: 15
+  weaponColor: 1
 --- !u!1 &1816663106 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100008, guid: c68d7b6bc07738a4caefe756cfa188cf, type: 3}
@@ -1123,6 +1128,11 @@ Prefab:
       propertyPath: weaponColour
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114814727639436034, guid: 722a5f046b142fe449027605bfa589f5,
+        type: 2}
+      propertyPath: weaponColor
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 722a5f046b142fe449027605bfa589f5, type: 2}
   m_IsPrefabParent: 0
@@ -1170,8 +1180,8 @@ MonoBehaviour:
   - {x: 25.61, y: 5.4, z: -17.56}
   - {x: 41.94, y: 5.4, z: 2.4}
   - {x: 39.38, y: 5.4, z: 23.99}
-  enemiesPerWaveletPerSide: 02000000
-  totalEnemiesPerWave: 04000000
+  enemiesPerWaveletPerSide: 020000000300000003000000
+  totalEnemiesPerWave: 060000000c00000018000000
   player1: {fileID: 1582915778}
   player2: {fileID: 335974237}
   enemy: {fileID: 1019661239853144, guid: fbb65f5738c09b54e911bbbba349efd9, type: 2}
