@@ -1128,17 +1128,12 @@ Prefab:
       propertyPath: weaponColour
       value: 1
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    m_RemovedComponents:
-    - {fileID: 114814727639436034, guid: 722a5f046b142fe449027605bfa589f5, type: 2}
-=======
     - target: {fileID: 114814727639436034, guid: 722a5f046b142fe449027605bfa589f5,
         type: 2}
       propertyPath: weaponColor
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
->>>>>>> aprilHootStuff
   m_ParentPrefab: {fileID: 100100000, guid: 722a5f046b142fe449027605bfa589f5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1954700597

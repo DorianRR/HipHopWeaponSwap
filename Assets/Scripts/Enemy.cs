@@ -194,14 +194,4 @@ public class Enemy : MonoBehaviour {
         this.targetPlayer = player;
         this.originalPlayer = player;
     }
-    public void ShotGunHit()
-    {
-        hitPoints--;
-        if (hitPoints < 1)
-        {
-            gc.registerEnemyDead(originalPlayer);
-            Destroy(this.gameObject);
-        }
-    }
-
 }
